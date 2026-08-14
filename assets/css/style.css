@@ -93,7 +93,7 @@ img {
   z-index: 10;
   flex: none;
   background: var(--bg);
-  padding: var(--header-pad-y) 20px 6px;
+  padding: var(--header-pad-y) 20px 0;
   text-align: center;
 }
 
@@ -202,8 +202,8 @@ img {
   color: var(--gold-muted);
 }
 
-/* 「回首頁」：位置對應首頁的「點選方塊　進入頁面」，屬於會轉場的內容區。
-   緊接在副標題下方，像是店名／副標題之後的第三行。 */
+/* 「回首頁」：位置對應首頁的「點選方塊　進入頁面」，兩者都放在頁首（固定區）
+   內，緊接在副標題下方，捲動內容區時仍會保持在畫面上方不被捲走。 */
 .page-nav {
   text-align: center;
   margin: 0 0 14px;
@@ -266,7 +266,7 @@ img {
 
 /* ===== 首頁九宮格 ===== */
 
-/* 與分類頁的「回首頁」對齊在同一條水平線上，轉場時兩行才會原地互換
+/* 與分類頁的「回首頁」對齊在同一條水平線上，都在頁首（固定區）內
    （上邊距 6px 剛好補掉 .home-btn 的 5px 內距與字級差） */
 .grid-hint {
   text-align: center;
@@ -534,6 +534,13 @@ main {
   view-transition-name: site-tagline;
 }
 
+/* 「回首頁」／「點選方塊　進入頁面」同屬頁首固定區，每頁只會出現其中一個，
+   共用同一個 view-transition-name，切換時直接以新內容呈現，不做文字跨頁變形 */
+.grid-hint,
+.page-nav {
+  view-transition-name: site-quicknav;
+}
+
 main {
   view-transition-name: page;
 }
@@ -547,6 +554,7 @@ main {
 ::view-transition-group(site-logo),
 ::view-transition-group(site-brand),
 ::view-transition-group(site-tagline),
+::view-transition-group(site-quicknav),
 ::view-transition-group(site-footer) {
   animation: none;
 }
@@ -555,6 +563,7 @@ main {
 ::view-transition-old(site-logo),
 ::view-transition-old(site-brand),
 ::view-transition-old(site-tagline),
+::view-transition-old(site-quicknav),
 ::view-transition-old(site-footer) {
   animation: none;
   opacity: 0;
@@ -564,6 +573,7 @@ main {
 ::view-transition-new(site-logo),
 ::view-transition-new(site-brand),
 ::view-transition-new(site-tagline),
+::view-transition-new(site-quicknav),
 ::view-transition-new(site-footer) {
   animation: none;
   opacity: 1;
@@ -599,9 +609,7 @@ main {
   }
 }
 
-.grid-hint,
 .grid,
-.page-nav,
 .page-content {
   animation: rise 0.32s ease-out both;
 }
@@ -622,9 +630,7 @@ main {
     animation: none !important;
     transition: none !important;
   }
-  .grid-hint,
   .grid,
-  .page-nav,
   .page-content {
     opacity: 1 !important;
     transform: none !important;
