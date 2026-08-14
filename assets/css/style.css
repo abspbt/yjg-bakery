@@ -1,0 +1,463 @@
+/* 歪嘴雞烘焙 — 全站共用樣式
+   配色與版面規則見專案根目錄 CLAUDE.md，請勿自行更改色調方向 */
+
+:root {
+  --bg: #2a2826;
+  --bg-alt: #26241f;
+  --bg-card: #332f29;
+  --gold: #c9a660;
+  --gold-muted: #b8935a;
+  --gold-bright: #ddc290;
+  --gold-line: rgba(201, 166, 96, 0.32);
+  --gold-line-soft: rgba(201, 166, 96, 0.18);
+  --max-w: 560px;
+  --header-pad-y: clamp(20px, 5vw, 32px);
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+}
+
+/* view-transitions：原生跨頁淡入淡出，不需 JS，不支援的瀏覽器會自動忽略 */
+@view-transition {
+  navigation: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at 50% 0%, var(--bg-alt) 0%, var(--bg) 60%);
+  color: var(--gold);
+  font-family: var(--font);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ===== 頁首（各頁共用元件） ===== */
+
+.site-header {
+  position: relative;
+  padding: var(--header-pad-y) 20px 18px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.header-glow {
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  width: 320px;
+  height: 320px;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    circle,
+    rgba(201, 166, 96, 0.22) 0%,
+    rgba(201, 166, 96, 0.1) 35%,
+    rgba(201, 166, 96, 0) 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.logo-wrap {
+  position: relative;
+  width: clamp(96px, 24vw, 132px);
+  height: clamp(96px, 24vw, 132px);
+  margin: 0 auto 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-ring,
+.logo-ring::before {
+  content: "";
+  position: absolute;
+  border: 1px dashed var(--gold-line);
+  border-radius: 50%;
+  inset: -10%;
+}
+
+.logo-ring::before {
+  inset: -22%;
+  border-color: var(--gold-line-soft);
+}
+
+.logo-img {
+  position: relative;
+  z-index: 1;
+  width: 78%;
+  height: 78%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.brand-name {
+  margin: 0;
+  font-size: clamp(22px, 6vw, 28px);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--gold-bright);
+}
+
+.header-slot {
+  margin-top: 6px;
+  min-height: 26px;
+}
+
+.tagline {
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  color: var(--gold-muted);
+}
+
+.home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: var(--gold-muted);
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  padding: 4px 14px;
+  border: 1px solid var(--gold-line);
+  border-radius: 999px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.home-btn:hover,
+.home-btn:focus-visible {
+  color: var(--gold-bright);
+  border-color: var(--gold);
+}
+
+.home-btn .icon {
+  width: 15px;
+  height: 15px;
+}
+
+/* ===== 圖示 ===== */
+
+.icon {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: currentColor;
+  flex-shrink: 0;
+}
+
+/* ===== 首頁九宮格 ===== */
+
+.grid-hint {
+  text-align: center;
+  margin: 4px 0 22px;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--gold-muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 0 6% 6%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--gold);
+  padding: clamp(20px, 6vw, 32px) 8px;
+  min-height: 96px;
+  border-right: 1px dashed transparent;
+  border-bottom: 1px dashed transparent;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.grid .cell:nth-child(3n + 1),
+.grid .cell:nth-child(3n + 2) {
+  border-right-color: var(--gold-line);
+}
+
+.grid .cell:nth-child(-n + 6) {
+  border-bottom-color: var(--gold-line);
+}
+
+.cell span {
+  font-size: 14px;
+  letter-spacing: 0.06em;
+}
+
+.cell:hover,
+.cell:focus-visible {
+  color: var(--gold-bright);
+  outline: none;
+}
+
+.cell-empty {
+  color: var(--gold-line);
+  opacity: 0.55;
+}
+
+.cell-empty .icon {
+  width: 22px;
+  height: 22px;
+}
+
+/* ===== 內容區（分類頁） ===== */
+
+main {
+  padding-bottom: 48px;
+}
+
+.page-content {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 4px 24px 8px;
+}
+
+.page-content h2 {
+  color: var(--gold-bright);
+  font-size: clamp(20px, 5.5vw, 24px);
+  letter-spacing: 0.08em;
+  margin: 6px 0 18px;
+  text-align: center;
+}
+
+.page-content p {
+  color: var(--gold-muted);
+  font-size: 15px;
+}
+
+.page-content section {
+  margin-bottom: 32px;
+}
+
+.section-title {
+  color: var(--gold);
+  font-size: 16px;
+  letter-spacing: 0.08em;
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--gold-line);
+}
+
+/* 產品圖片卡片 */
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.product-card {
+  background: var(--bg-card);
+  border: 1px solid var(--gold-line-soft);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.product-photo {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  background: linear-gradient(160deg, #3a352c, #221f1a);
+  overflow: hidden;
+}
+
+.product-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(0.18) saturate(1.05) brightness(0.96);
+  border: 1px solid var(--gold-line-soft);
+}
+
+.product-photo .icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  color: var(--gold-line);
+}
+
+.product-card figcaption {
+  padding: 10px 12px 14px;
+  font-size: 13px;
+  color: var(--gold-muted);
+  letter-spacing: 0.04em;
+}
+
+/* 資訊清單（關於我們） */
+
+.info-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.info-list li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 14px;
+  color: var(--gold-muted);
+}
+
+.info-list .icon {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  color: var(--gold);
+}
+
+.map-frame {
+  margin-top: 16px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--gold-line-soft);
+  aspect-ratio: 4 / 3;
+}
+
+.map-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* 連結按鈕 / 卡片內連結 */
+
+.link-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  color: var(--gold-bright);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.notice-box {
+  background: var(--bg-card);
+  border: 1px dashed var(--gold-line);
+  border-radius: 10px;
+  padding: 16px 18px;
+  font-size: 14px;
+  color: var(--gold-muted);
+}
+
+/* FAQ */
+
+.faq-item {
+  border-bottom: 1px dashed var(--gold-line-soft);
+  padding: 16px 0;
+}
+
+.faq-item:first-child {
+  padding-top: 0;
+}
+
+.faq-item h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+  color: var(--gold-bright);
+  display: flex;
+  gap: 8px;
+}
+
+.faq-item p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* ===== 轉場（fade / slide，尊重減少動態效果偏好） ===== */
+
+.page-content,
+.grid {
+  animation: rise 0.5s ease-out both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0.01;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+  .page-content,
+  .grid {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ===== footer ===== */
+
+.site-footer {
+  text-align: center;
+  padding: 20px 20px 40px;
+  font-size: 12px;
+  color: var(--gold-line);
+  letter-spacing: 0.05em;
+}
+
+@media (min-width: 640px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
