@@ -168,25 +168,24 @@ img {
   margin: 0;
   font-size: clamp(22px, 6vw, 28px);
   font-weight: 700;
+  line-height: 1.25;
   letter-spacing: 0.12em;
   color: var(--gold-bright);
 }
 
-/* 標語（首頁）與「回首頁」按鈕（分類頁）共用同一個插槽。
-   高度寫死，確保兩者互換時頁首總高度不變。 */
-.header-slot {
-  margin-top: 8px;
-  height: 34px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
+/* 副標題緊接在店名下方，像同一段的第二行 */
 .tagline {
-  margin: 0;
+  margin: 4px 0 0;
   font-size: 14px;
+  line-height: 1.4;
   letter-spacing: 0.08em;
   color: var(--gold-muted);
+}
+
+/* 「回首頁」按鈕：位置對應首頁的「點選方塊　進入頁面」，屬於會轉場的內容區 */
+.page-nav {
+  text-align: center;
+  margin: 6px 0 16px;
 }
 
 .home-btn {
@@ -488,8 +487,8 @@ main {
   view-transition-name: site-brand;
 }
 
-.header-slot {
-  view-transition-name: header-slot;
+.tagline {
+  view-transition-name: site-tagline;
 }
 
 main {
@@ -504,6 +503,7 @@ main {
 ::view-transition-group(root),
 ::view-transition-group(site-logo),
 ::view-transition-group(site-brand),
+::view-transition-group(site-tagline),
 ::view-transition-group(site-footer) {
   animation: none;
 }
@@ -511,6 +511,7 @@ main {
 ::view-transition-old(root),
 ::view-transition-old(site-logo),
 ::view-transition-old(site-brand),
+::view-transition-old(site-tagline),
 ::view-transition-old(site-footer) {
   animation: none;
   opacity: 0;
@@ -519,15 +520,11 @@ main {
 ::view-transition-new(root),
 ::view-transition-new(site-logo),
 ::view-transition-new(site-brand),
+::view-transition-new(site-tagline),
 ::view-transition-new(site-footer) {
   animation: none;
   opacity: 1;
   mix-blend-mode: normal;
-}
-
-/* 頁首插槽：標語 ↔ 回首頁按鈕，僅這一小塊淡入淡出 */
-::view-transition-group(header-slot) {
-  animation-duration: 240ms;
 }
 
 /* 內容區：舊頁面淡出，新頁面沿用自身的 rise 動畫淡入上移 */
@@ -559,8 +556,10 @@ main {
   }
 }
 
-.page-content,
-.grid {
+.grid-hint,
+.grid,
+.page-nav,
+.page-content {
   animation: rise 0.32s ease-out both;
 }
 
@@ -580,14 +579,13 @@ main {
     animation: none !important;
     transition: none !important;
   }
-  .page-content,
-  .grid {
+  .grid-hint,
+  .grid,
+  .page-nav,
+  .page-content {
     opacity: 1 !important;
     transform: none !important;
   }
-  ::view-transition-group(header-slot),
-  ::view-transition-old(header-slot),
-  ::view-transition-new(header-slot),
   ::view-transition-group(page),
   ::view-transition-old(page),
   ::view-transition-new(page) {
