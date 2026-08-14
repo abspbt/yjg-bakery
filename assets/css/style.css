@@ -45,11 +45,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* 首頁：頁首與頁尾之間的空間置中放置提示文字＋九宮格 */
+/* 首頁：提示文字＋九宮格填滿頁首與頁尾之間的整塊空間 */
 body.home main {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  min-height: 0;
   padding-top: 0;
   padding-bottom: 0;
 }
@@ -83,13 +83,31 @@ img {
 
 /* ===== 頁首（各頁共用元件） ===== */
 
-/* 頁首是全站的「固定區」：每一頁的結構、尺寸、間距都必須完全相同，
-   跨頁轉場時才不會有任何位移或閃爍（見下方 view transitions 區塊）。 */
+/* 頁首是全站的「固定區」：
+   1. sticky + 不透明底色 → 捲動時 Logo 區塊永遠停在畫面上方，只有下方內容會動
+   2. 每一頁的結構、尺寸、間距完全相同 → 跨頁轉場時同樣不會有位移或閃爍
+      （見下方 view transitions 區塊） */
 .site-header {
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 10;
   flex: none;
+  background: var(--bg);
   padding: var(--header-pad-y) 20px 18px;
   text-align: center;
+}
+
+/* 捲動時內容會從頁首下緣消失，加一段同色漸層讓交界處自然淡出，
+   不會出現文字被硬切一半的邊界 */
+.site-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 18px;
+  background: linear-gradient(to bottom, #26241f, rgba(38, 36, 31, 0));
+  pointer-events: none;
 }
 
 /* 以 Logo 為中心向外擴散的淡白色柔光。
@@ -210,18 +228,24 @@ img {
 
 .grid-hint {
   text-align: center;
-  margin: 4px 0 22px;
+  margin: 6px 0 16px;
   font-size: 13px;
   letter-spacing: 0.1em;
   color: var(--gold-muted);
 }
 
+/* 九宮格撐滿頁首與頁尾之間剩下的空間，三列等高；
+   左右／下方保留邊距，虛線不貼齊畫面邊界 */
 .grid {
+  flex: 1;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  padding: 0 6% 6%;
+  grid-template-rows: repeat(3, 1fr);
+  width: 100%;
   max-width: var(--max-w);
+  max-height: 540px;
   margin: 0 auto;
+  padding: 0 6% 5%;
 }
 
 .cell {
@@ -229,15 +253,20 @@ img {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   text-align: center;
   text-decoration: none;
   color: var(--gold);
-  padding: clamp(20px, 6vw, 32px) 8px;
-  min-height: 96px;
+  padding: 10px 8px;
+  min-height: 84px;
   border-right: 1px dashed transparent;
   border-bottom: 1px dashed transparent;
   transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.cell .icon {
+  width: 30px;
+  height: 30px;
 }
 
 .grid .cell:nth-child(3n + 1),
@@ -250,7 +279,7 @@ img {
 }
 
 .cell span {
-  font-size: 14px;
+  font-size: 15px;
   letter-spacing: 0.06em;
 }
 
