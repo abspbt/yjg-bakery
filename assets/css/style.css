@@ -25,12 +25,11 @@
   box-sizing: border-box;
 }
 
-/* 背景漸層放在 html：根元素的背景會延伸繪製整個 canvas（含 iOS 瀏覽器
-   安全區、上下滑動回彈區）。若改放在 body，html 另一個底色會在 body 上緣
-   形成色差接縫，看起來就像畫面最上方被切掉一條。 */
+/* 全站單一底色，且只由 html 繪製：根元素的純色背景會確實填滿整個 canvas
+   （含 iOS 安全區與上下滑動回彈區）。body 不另外設背景，避免兩層底色在
+   交界處形成色差接縫。 */
 html {
-  min-height: 100%;
-  background: radial-gradient(ellipse at 50% 0%, var(--bg-alt) 0%, var(--bg) 60%);
+  background: var(--bg);
 }
 
 body {
@@ -77,33 +76,21 @@ img {
   text-align: center;
 }
 
-/* 由上往下的投射光：上窄下寬的梯形光束，往下漸層融入背景。
-   以三層由小到大、由亮到暗的橢圓漸層堆疊出擴散感 —— 邊緣天然柔和，
-   不需 clip-path／blur，效能也最好。元素頂端刻意超出畫面上緣，
-   避免光源處出現生硬的水平切邊。 */
+/* 以 Logo 為中心向外擴散的淡白色柔光。
+   放在 .logo-wrap 內，故永遠對齊 Logo 中心；漸層在方框內就完全透明，
+   邊緣天然柔和，不需 clip-path／blur，效能也最好。
+   inset -110% 換算後最寬約 422px，不會超出視窗造成水平捲動。 */
 .header-glow {
   position: absolute;
-  top: -60px;
-  left: 50%;
-  width: min(100vw, 560px);
-  height: 460px;
-  transform: translateX(-50%);
-  background:
-    radial-gradient(
-      ellipse 24% 34% at 50% 12%,
-      rgba(255, 255, 255, 0.058) 0%,
-      rgba(255, 255, 255, 0) 70%
-    ),
-    radial-gradient(
-      ellipse 44% 44% at 50% 36%,
-      rgba(255, 255, 255, 0.03) 0%,
-      rgba(255, 255, 255, 0) 72%
-    ),
-    radial-gradient(
-      ellipse 74% 50% at 50% 66%,
-      rgba(255, 255, 255, 0.016) 0%,
-      rgba(255, 255, 255, 0) 78%
-    );
+  inset: -110%;
+  /* 橫向擴散、縱向收斂：讓柔光在觸及畫面上緣前就完全透明，
+     避免在視窗頂端留下亮度斷階 */
+  background: radial-gradient(
+    ellipse 46% 30% at 50% 50%,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.022) 34%,
+    rgba(255, 255, 255, 0) 70%
+  );
   pointer-events: none;
   z-index: 0;
 }
