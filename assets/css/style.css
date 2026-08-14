@@ -277,7 +277,10 @@ img {
 }
 
 /* 九宮格撐滿頁首與頁尾之間剩下的空間，三列等高；
-   左右／下方保留邊距，虛線不貼齊畫面邊界 */
+   左右／下方保留邊距，虛線不貼齊畫面邊界。
+   margin: auto → 高度被 max-height 收住後，剩餘空間平均分配到上下，
+   讓整塊九宮格垂直置中於「點選方塊　進入頁面」與頁尾版權行之間
+   （比例不變，只是整體下移）。 */
 .grid {
   flex: 1;
   display: grid;
@@ -286,7 +289,7 @@ img {
   width: 100%;
   max-width: var(--max-w);
   max-height: 540px;
-  margin: 0 auto;
+  margin: auto;
   padding: 0 6% 5%;
 }
 
@@ -638,10 +641,12 @@ main {
 
 /* ===== footer ===== */
 
+/* 版權行貼齊畫面最底（瀏覽器網址列的上一行）：
+   下方只留極小的呼吸空間＋iOS 安全區，不再壓上 40px 的留白 */
 .site-footer {
   flex: none;
   text-align: center;
-  padding: 20px 20px 40px;
+  padding: 12px 20px calc(6px + env(safe-area-inset-bottom));
   font-size: 12px;
   color: var(--gold-line);
   letter-spacing: 0.05em;
