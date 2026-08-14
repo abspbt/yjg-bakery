@@ -32,9 +32,13 @@ html {
   background: var(--bg);
 }
 
+/* 全站統一版型：頁首（固定區）→ 內容區（轉場區）→ 頁尾永遠貼齊底部 */
 body {
   margin: 0;
   min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
   color: var(--gold);
   font-family: var(--font);
   line-height: 1.7;
@@ -42,15 +46,7 @@ body {
 }
 
 /* 首頁：頁首與頁尾之間的空間置中放置提示文字＋九宮格 */
-body.home {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  min-height: 100dvh;
-}
-
 body.home main {
-  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -87,8 +83,11 @@ img {
 
 /* ===== 頁首（各頁共用元件） ===== */
 
+/* 頁首是全站的「固定區」：每一頁的結構、尺寸、間距都必須完全相同，
+   跨頁轉場時才不會有任何位移或閃爍（見下方 view transitions 區塊）。 */
 .site-header {
   position: relative;
+  flex: none;
   padding: var(--header-pad-y) 20px 18px;
   text-align: center;
 }
@@ -155,9 +154,14 @@ img {
   color: var(--gold-bright);
 }
 
+/* 標語（首頁）與「回首頁」按鈕（分類頁）共用同一個插槽。
+   高度寫死，確保兩者互換時頁首總高度不變。 */
 .header-slot {
-  margin-top: 6px;
-  min-height: 26px;
+  margin-top: 8px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .tagline {
@@ -266,10 +270,11 @@ img {
   height: 22px;
 }
 
-/* ===== 內容區（分類頁） ===== */
+/* ===== 內容區（轉場區） ===== */
 
 main {
-  padding-bottom: 48px;
+  flex: 1;
+  padding-bottom: 40px;
 }
 
 .page-content {
@@ -438,11 +443,96 @@ main {
   font-size: 14px;
 }
 
-/* ===== 轉場（fade / slide，尊重減少動態效果偏好） ===== */
+/* ===== 轉場（fade / slide，尊重減少動態效果偏好） =====
+
+   規則：頁首（Logo＋光暈＋店名＋插槽）與頁尾為「固定區」，換頁時完全不動；
+   只有 <main> 這塊內容區做淡入淡出。
+   作法是把固定區各自標上 view-transition-name，讓新舊頁面的同名元素配對成
+   同一個快照群組，再把它們的動畫關掉 → 視覺上就是原地不動。
+   不支援 view transitions 的瀏覽器會忽略以下規則，改由 .rise 動畫做淡入。 */
+
+.logo-wrap {
+  view-transition-name: site-logo;
+}
+
+.brand-name {
+  view-transition-name: site-brand;
+}
+
+.header-slot {
+  view-transition-name: header-slot;
+}
+
+main {
+  view-transition-name: page;
+}
+
+.site-footer {
+  view-transition-name: site-footer;
+}
+
+/* 固定區：新舊快照都不做動畫，直接以新頁面的樣子呈現 */
+::view-transition-group(root),
+::view-transition-group(site-logo),
+::view-transition-group(site-brand),
+::view-transition-group(site-footer) {
+  animation: none;
+}
+
+::view-transition-old(root),
+::view-transition-old(site-logo),
+::view-transition-old(site-brand),
+::view-transition-old(site-footer) {
+  animation: none;
+  opacity: 0;
+}
+
+::view-transition-new(root),
+::view-transition-new(site-logo),
+::view-transition-new(site-brand),
+::view-transition-new(site-footer) {
+  animation: none;
+  opacity: 1;
+  mix-blend-mode: normal;
+}
+
+/* 頁首插槽：標語 ↔ 回首頁按鈕，僅這一小塊淡入淡出 */
+::view-transition-group(header-slot) {
+  animation-duration: 240ms;
+}
+
+/* 內容區：舊頁面淡出，新頁面沿用自身的 rise 動畫淡入上移 */
+::view-transition-group(page) {
+  animation-duration: 260ms;
+}
+
+::view-transition-old(page),
+::view-transition-new(page) {
+  /* 保留各自原始高度，避免兩頁高度不同時內容被垂直拉伸 */
+  height: auto;
+  object-fit: none;
+  object-position: top center;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(page) {
+  animation: fade-out 200ms ease-out both;
+}
+
+::view-transition-new(page) {
+  animation: none;
+  opacity: 1;
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
 
 .page-content,
 .grid {
-  animation: rise 0.5s ease-out both;
+  animation: rise 0.32s ease-out both;
 }
 
 @keyframes rise {
@@ -466,11 +556,20 @@ main {
     opacity: 1 !important;
     transform: none !important;
   }
+  ::view-transition-group(header-slot),
+  ::view-transition-old(header-slot),
+  ::view-transition-new(header-slot),
+  ::view-transition-group(page),
+  ::view-transition-old(page),
+  ::view-transition-new(page) {
+    animation: none !important;
+  }
 }
 
 /* ===== footer ===== */
 
 .site-footer {
+  flex: none;
   text-align: center;
   padding: 20px 20px 40px;
   font-size: 12px;
