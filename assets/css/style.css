@@ -74,19 +74,33 @@ img {
   text-align: center;
 }
 
+/* 由上往下的投射光：上窄下寬的梯形光束，往下漸層融入背景。
+   以三層由小到大、由亮到暗的橢圓漸層堆疊出擴散感 —— 邊緣天然柔和，
+   不需 clip-path／blur，效能也最好。元素頂端刻意超出畫面上緣，
+   避免光源處出現生硬的水平切邊。 */
 .header-glow {
   position: absolute;
-  top: 0;
+  top: -60px;
   left: 50%;
-  width: clamp(260px, 78vw, 380px);
-  height: clamp(260px, 78vw, 380px);
+  width: clamp(360px, 128vw, 560px);
+  height: 460px;
   transform: translateX(-50%);
-  background: radial-gradient(
-    ellipse 55% 90% at 50% 0%,
-    rgba(255, 255, 255, 0.22) 0%,
-    rgba(255, 255, 255, 0.09) 45%,
-    rgba(255, 255, 255, 0) 78%
-  );
+  background:
+    radial-gradient(
+      ellipse 24% 34% at 50% 12%,
+      rgba(255, 255, 255, 0.058) 0%,
+      rgba(255, 255, 255, 0) 70%
+    ),
+    radial-gradient(
+      ellipse 44% 44% at 50% 36%,
+      rgba(255, 255, 255, 0.03) 0%,
+      rgba(255, 255, 255, 0) 72%
+    ),
+    radial-gradient(
+      ellipse 74% 50% at 50% 66%,
+      rgba(255, 255, 255, 0.016) 0%,
+      rgba(255, 255, 255, 0) 78%
+    );
   pointer-events: none;
   z-index: 0;
 }
@@ -107,12 +121,13 @@ img {
   position: absolute;
   border: 1px dashed var(--gold-line);
   border-radius: 50%;
-  inset: -6%;
+  inset: -2%;
   z-index: 1;
 }
 
+/* 註：::before 的 inset 以 .logo-ring 為基準疊加，故外圈實際半徑會再放大一次 */
 .logo-ring::before {
-  inset: -13%;
+  inset: -8%;
   border-color: var(--gold-line-soft);
 }
 
