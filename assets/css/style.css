@@ -2,7 +2,7 @@
    配色與版面規則見專案根目錄 CLAUDE.md，請勿自行更改色調方向 */
 
 :root {
-  --bg: #2a2826;
+  --bg: #26241f;
   --bg-alt: #26241f;
   --bg-card: #332f29;
   --gold: #c9a660;
@@ -39,6 +39,23 @@ body {
   font-family: var(--font);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+}
+
+/* 首頁：頁首與頁尾之間的空間置中放置提示文字＋九宮格 */
+body.home {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+body.home main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 a {
