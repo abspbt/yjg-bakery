@@ -266,11 +266,11 @@ img {
 
 /* ===== 首頁九宮格 ===== */
 
-/* 首頁提示文字不必貼著副標題，維持原本與頁首的距離
-   （頁首下緣留白已縮小，故這裡補回上邊距） */
+/* 與分類頁的「回首頁」對齊在同一條水平線上，轉場時兩行才會原地互換
+   （上邊距 6px 剛好補掉 .home-btn 的 5px 內距與字級差） */
 .grid-hint {
   text-align: center;
-  margin: 18px 0 16px;
+  margin: 6px 0 16px;
   font-size: 13px;
   letter-spacing: 0.1em;
   color: var(--gold-muted);
