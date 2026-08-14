@@ -93,21 +93,41 @@ img {
   z-index: 10;
   flex: none;
   background: var(--bg);
-  padding: var(--header-pad-y) 20px 18px;
+  padding: var(--header-pad-y) 20px 6px;
   text-align: center;
 }
 
-/* 捲動時內容會從頁首下緣消失，加一段同色漸層讓交界處自然淡出，
-   不會出現文字被硬切一半的邊界 */
+/* 內容捲進頁首下緣時用同色漸層淡出，避免文字被硬切一半。
+   靜止（捲軸在最頂端）時完全透明，不會壓在「回首頁」那一行上；
+   一開始捲動才淡入 —— 用 scroll-driven animation，不需要 JS。
+   不支援的瀏覽器維持 opacity 0，也就是永遠看不到漸層。 */
 .site-header::after {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
   top: 100%;
-  height: 18px;
+  height: 26px;
+  opacity: 0;
   background: linear-gradient(to bottom, #26241f, rgba(38, 36, 31, 0));
   pointer-events: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  .site-header::after {
+    animation: edge-fade linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0 20px;
+  }
+}
+
+@keyframes edge-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* 以 Logo 為中心向外擴散的淡白色柔光。
@@ -182,30 +202,51 @@ img {
   color: var(--gold-muted);
 }
 
-/* 「回首頁」按鈕：位置對應首頁的「點選方塊　進入頁面」，屬於會轉場的內容區 */
+/* 「回首頁」：位置對應首頁的「點選方塊　進入頁面」，屬於會轉場的內容區。
+   緊接在副標題下方，像是店名／副標題之後的第三行。 */
 .page-nav {
   text-align: center;
-  margin: 6px 0 16px;
+  margin: 0 0 14px;
 }
 
+/* 不做成按鈕外框，改為兩側「細線＋圓點」的橫飾線：—． 回首頁 ．— */
 .home-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  padding: 5px 0;
   text-decoration: none;
   color: var(--gold-muted);
   font-size: 14px;
-  letter-spacing: 0.06em;
-  padding: 4px 14px;
-  border: 1px solid var(--gold-line);
-  border-radius: 999px;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  letter-spacing: 0.1em;
+  transition: color 0.2s ease;
+}
+
+.home-btn::before,
+.home-btn::after {
+  content: "";
+  flex: none;
+  width: 42px;
+  height: 4px;
+  opacity: 0.6;
+  background-repeat: no-repeat;
+  background-image:
+    linear-gradient(currentColor, currentColor),
+    radial-gradient(circle closest-side, currentColor 100%, rgba(0, 0, 0, 0) 100%);
+  background-size: 30px 1px, 4px 4px;
+}
+
+.home-btn::before {
+  background-position: left center, right center;
+}
+
+.home-btn::after {
+  background-position: right center, left center;
 }
 
 .home-btn:hover,
 .home-btn:focus-visible {
   color: var(--gold-bright);
-  border-color: var(--gold);
 }
 
 .home-btn .icon {
@@ -225,9 +266,11 @@ img {
 
 /* ===== 首頁九宮格 ===== */
 
+/* 首頁提示文字不必貼著副標題，維持原本與頁首的距離
+   （頁首下緣留白已縮小，故這裡補回上邊距） */
 .grid-hint {
   text-align: center;
-  margin: 6px 0 16px;
+  margin: 18px 0 16px;
   font-size: 13px;
   letter-spacing: 0.1em;
   color: var(--gold-muted);
