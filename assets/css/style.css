@@ -276,19 +276,16 @@ img {
   color: var(--gold-muted);
 }
 
-/* 九宮格撐滿頁首與頁尾之間剩下的空間，三列等高；
-   左右／下方保留邊距，虛線不貼齊畫面邊界。
-   margin: auto → 高度被 max-height 收住後，剩餘空間平均分配到上下，
-   讓整塊九宮格垂直置中於「點選方塊　進入頁面」與頁尾版權行之間
-   （比例不變，只是整體下移）。 */
+/* 九宮格寬度撐滿版心，每格用 aspect-ratio 強制正方形（列高跟著欄寬走，
+   不受可用高度擠壓變形）；grid 本身不再撐滿垂直空間，改用 margin: auto
+   讓整塊在「點選方塊　進入頁面」與頁尾版權行之間垂直置中，比例不變。
+   左右／下方保留邊距，虛線不貼齊畫面邊界。 */
 .grid {
-  flex: 1;
+  flex: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
   width: 100%;
   max-width: var(--max-w);
-  max-height: 540px;
   margin: auto;
   padding: 0 6% 5%;
 }
@@ -299,11 +296,11 @@ img {
   align-items: center;
   justify-content: center;
   gap: 12px;
+  aspect-ratio: 1;
   text-align: center;
   text-decoration: none;
   color: var(--gold);
   padding: 10px 8px;
-  min-height: 84px;
   border-right: 1px dashed transparent;
   border-bottom: 1px dashed transparent;
   transition: color 0.2s ease, opacity 0.2s ease;
