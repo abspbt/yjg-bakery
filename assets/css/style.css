@@ -77,16 +77,16 @@ img {
 
 .header-glow {
   position: absolute;
-  top: -40%;
+  top: 50%;
   left: 50%;
-  width: 320px;
-  height: 320px;
-  transform: translateX(-50%);
+  width: clamp(220px, 68vw, 340px);
+  height: clamp(220px, 68vw, 340px);
+  transform: translate(-50%, -50%);
   background: radial-gradient(
     circle,
-    rgba(201, 166, 96, 0.22) 0%,
-    rgba(201, 166, 96, 0.1) 35%,
-    rgba(201, 166, 96, 0) 70%
+    rgba(201, 166, 96, 0.38) 0%,
+    rgba(201, 166, 96, 0.18) 40%,
+    rgba(201, 166, 96, 0) 72%
   );
   pointer-events: none;
   z-index: 0;
@@ -108,11 +108,12 @@ img {
   position: absolute;
   border: 1px dashed var(--gold-line);
   border-radius: 50%;
-  inset: -10%;
+  inset: -6%;
+  z-index: 1;
 }
 
 .logo-ring::before {
-  inset: -22%;
+  inset: -13%;
   border-color: var(--gold-line-soft);
 }
 
