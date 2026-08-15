@@ -349,6 +349,13 @@ main {
   padding-bottom: 40px;
 }
 
+/* nav.js 換頁後會用 JS 將 <main> 設為可聚焦並呼叫 focus()，
+   讓螢幕報讀器感知內容已更新；此聚焦純屬功能性，非鍵盤操作觸發，
+   移除瀏覽器預設外框，避免每次換頁畫面閃過一道藍色反白線 */
+main:focus {
+  outline: none;
+}
+
 .page-content {
   max-width: var(--max-w);
   margin: 0 auto;
