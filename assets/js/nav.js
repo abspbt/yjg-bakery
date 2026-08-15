@@ -44,7 +44,7 @@
     window.scrollTo(0, 0);
     if (oldMain) {
       oldMain.setAttribute('tabindex', '-1');
-      oldMain.focus();
+      oldMain.focus({ preventScroll: true });
     }
   }
 
