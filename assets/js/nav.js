@@ -3,6 +3,21 @@
    頁尾固定區與 <main> 淡入淡出設定（見 style.css）。
    不支援 fetch 或發生錯誤時，直接退回原生整頁跳轉，不影響可用性。 */
 (function () {
+  /* 站內連結／資源一律用相對路徑，網站才能同時掛在網域根目錄與子路徑
+     （例：GitHub Pages 專案頁 /yjg-bakery/）底下，見 CLAUDE.md 路徑慣例。
+
+     但 <head> 裡的相對路徑有個例外要處理：換頁只用 pushState 改網址、不重新
+     載入文件，瀏覽器之後若再去解析 <head> 的相對 URL，會以「新網址」為基準，
+     favicon 就變成 /about/../assets/img/favicon.svg 之類的錯誤路徑而 404。
+     載入時先把它們讀成絕對 URL 再寫回去（讀 .href 得到的就是解析後的絕對值），
+     之後網址怎麼變都不會再被重算。 */
+  function freezeHeadUrls() {
+    var links = document.querySelectorAll('head link[href]');
+    Array.prototype.forEach.call(links, function (link) {
+      link.setAttribute('href', link.href);
+    });
+  }
+
   function shuffleGrid() {
     var grid = document.querySelector('.grid');
     if (!grid) return;
@@ -127,5 +142,6 @@
     navigate(location.pathname + location.search, false);
   });
 
+  freezeHeadUrls();
   shuffleGrid();
 })();
