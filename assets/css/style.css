@@ -429,59 +429,106 @@ main {
   letter-spacing: 0.04em;
 }
 
-/* 品牌故事（關於我們） */
+/* 品牌故事（關於我們）— 雜誌式圖文繞排 */
 
 .brand-story {
   margin-bottom: 8px;
 }
 
-.chef-photo {
-  margin: 0 0 20px;
-  aspect-ratio: 4 / 3;
-  border-radius: 10px;
+.brand-story::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.story-photo {
+  float: left;
+  width: 42%;
+  margin: 2px 16px 12px 0;
+  aspect-ratio: 3 / 4;
+  border-radius: 8px;
   overflow: hidden;
   border: 1px solid var(--gold-line-soft);
 }
 
-.chef-photo img {
+.story-photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   filter: sepia(0.18) saturate(1.05) brightness(0.96);
 }
 
+.story-kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--gold-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  margin: 4px 0 10px;
+}
+
+.story-kicker::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 1px;
+  background: var(--gold-line);
+}
+
 .story-headline {
   color: var(--gold-bright);
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1.6;
-  letter-spacing: 0.03em;
-  margin: 0 0 10px;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: 0.04em;
+  margin: 0 0 14px;
 }
 
 .story-lead {
   color: var(--gold);
   font-size: 14px;
-  line-height: 1.7;
-  letter-spacing: 0.03em;
-  margin: 0 0 22px;
-  padding-bottom: 18px;
-  border-bottom: 1px dashed var(--gold-line);
+  font-style: italic;
+  line-height: 1.75;
+  letter-spacing: 0.02em;
+  margin: 0 0 16px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--gold-line);
 }
 
 .brand-story p {
-  line-height: 1.85;
+  line-height: 1.9;
+  letter-spacing: 0.01em;
   margin: 0 0 14px;
+  text-align: justify;
+}
+
+.story-clear {
+  clear: both;
+  padding-top: 4px;
+}
+
+.story-dropcap::first-letter {
+  float: left;
+  font-size: 3em;
+  line-height: 0.8;
+  font-weight: 700;
+  padding: 4px 6px 0 0;
+  color: var(--gold-bright);
 }
 
 .story-quote {
-  margin: 18px 0;
-  padding: 4px 18px;
+  position: relative;
+  margin: 20px 0 24px;
+  padding: 10px 0 10px 22px;
   border-left: 2px solid var(--gold-line);
   color: var(--gold-bright);
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 600;
   font-style: italic;
-  line-height: 1.8;
+  line-height: 1.85;
+  letter-spacing: 0.02em;
 }
 
 /* 資訊清單（關於我們） */
