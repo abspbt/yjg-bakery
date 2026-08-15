@@ -538,6 +538,30 @@ main:focus {
   letter-spacing: 0.02em;
 }
 
+.feature-list {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 0;
+}
+
+.feature-list li {
+  padding: 12px 0;
+  border-top: 1px dashed var(--gold-line-soft);
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--gold-muted);
+  text-align: justify;
+}
+
+.feature-list li:last-child {
+  border-bottom: 1px dashed var(--gold-line-soft);
+}
+
+.feature-list strong {
+  color: var(--gold-bright);
+  letter-spacing: 0.03em;
+}
+
 /* 資訊清單（關於我們） */
 
 .info-list {
