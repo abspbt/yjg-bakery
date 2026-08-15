@@ -429,6 +429,61 @@ main {
   letter-spacing: 0.04em;
 }
 
+/* 品牌故事（關於我們） */
+
+.brand-story {
+  margin-bottom: 8px;
+}
+
+.chef-photo {
+  margin: 0 0 20px;
+  aspect-ratio: 4 / 3;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--gold-line-soft);
+}
+
+.chef-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(0.18) saturate(1.05) brightness(0.96);
+}
+
+.story-headline {
+  color: var(--gold-bright);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: 0.03em;
+  margin: 0 0 10px;
+}
+
+.story-lead {
+  color: var(--gold);
+  font-size: 14px;
+  line-height: 1.7;
+  letter-spacing: 0.03em;
+  margin: 0 0 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px dashed var(--gold-line);
+}
+
+.brand-story p {
+  line-height: 1.85;
+  margin: 0 0 14px;
+}
+
+.story-quote {
+  margin: 18px 0;
+  padding: 4px 18px;
+  border-left: 2px solid var(--gold-line);
+  color: var(--gold-bright);
+  font-size: 14px;
+  font-style: italic;
+  line-height: 1.8;
+}
+
 /* 資訊清單（關於我們） */
 
 .info-list {
