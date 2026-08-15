@@ -11,8 +11,8 @@
 <meta property="og:description" content="歪嘴雞烘焙是位於高雄的手作烘焙品牌，主打手工貝果與客製化蛋糕，另有販售溫沙拉。點選方塊瀏覽貝果預訂、蛋糕訂製、常見問題等頁面。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_TW">
-<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body class="home">
   <h1 class="sr-only">高雄手作貝果．手作蛋糕</h1>
@@ -20,7 +20,7 @@
     <div class="logo-wrap">
       <span class="header-glow" aria-hidden="true"></span>
       <span class="logo-ring" aria-hidden="true"></span>
-      <img class="logo-img" src="assets/img/logo.webp" alt="歪嘴雞烘焙 品牌標誌，插畫小雞手捧貝果" width="120" height="120" fetchpriority="high">
+      <img class="logo-img" src="/assets/img/logo.webp" alt="歪嘴雞烘焙 品牌標誌，插畫小雞手捧貝果" width="120" height="120" fetchpriority="high">
     </div>
     <p class="brand-name">歪嘴雞烘焙</p>
     <p class="tagline">手作貝果．客製化蛋糕</p>
@@ -28,27 +28,27 @@
   </header>
   <main>
     <nav class="grid" aria-label="分類導覽">
-      <a class="cell" href="cake-order/">
+      <a class="cell" href="/cake-order/">
         <svg class="icon" aria-hidden="true"><use href="#icon-cake"></use></svg>
         <span>蛋糕訂製</span>
       </a>
-      <a class="cell" href="about/">
+      <a class="cell" href="/about/">
         <svg class="icon" aria-hidden="true"><use href="#icon-shop"></use></svg>
         <span>關於我們</span>
       </a>
-      <a class="cell" href="faq/">
+      <a class="cell" href="/faq/">
         <svg class="icon" aria-hidden="true"><use href="#icon-faq"></use></svg>
         <span>常見問題</span>
       </a>
-      <a class="cell" href="bagel-order/">
+      <a class="cell" href="/bagel-order/">
         <svg class="icon" aria-hidden="true"><use href="#icon-order"></use></svg>
         <span>貝果預訂</span>
       </a>
-      <a class="cell" href="bagel/">
+      <a class="cell" href="/bagel/">
         <svg class="icon" aria-hidden="true"><use href="#icon-bagel"></use></svg>
         <span>手作貝果</span>
       </a>
-      <a class="cell" href="warm-salad/">
+      <a class="cell" href="/warm-salad/">
         <svg class="icon" aria-hidden="true"><use href="#icon-salad"></use></svg>
         <span>溫沙拉</span>
       </a>
@@ -63,23 +63,11 @@
       </div>
     </nav>
   </main>
-  <script src="assets/js/nav.js" defer></script>
   <footer class="site-footer">
-    <p>&copy; 2025 歪嘴雞烘焙．高雄手作貝果．客製化蛋糕</p>
+    <p>&copy; 2026 歪嘴雞烘焙．高雄手作貝果．客製化蛋糕</p>
   </footer>
-  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <svg id="icon-sprite" xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <defs>
-      <symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M4 11.5 12 4l8 7.5"/>
-        <path d="M6 10v10h12V10"/>
-        <path d="M10 20v-5.5h4V20"/>
-      </symbol>
-      <symbol id="icon-shop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M4 9.5 5 4h14l1 5.5"/>
-        <path d="M4 9.5a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0"/>
-        <path d="M5.5 11v9h13v-9"/>
-        <path d="M10 20v-5.5a2 2 0 0 1 4 0V20"/>
-      </symbol>
       <symbol id="icon-bagel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="8"/>
         <circle cx="12" cy="12" r="3.4"/>
@@ -88,11 +76,6 @@
         <circle cx="15.4" cy="8" r="0.4" fill="currentColor" stroke="none"/>
         <circle cx="16.6" cy="11.3" r="0.4" fill="currentColor" stroke="none"/>
       </symbol>
-      <symbol id="icon-order" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="4" y="4" width="16" height="17" rx="1.5"/>
-        <path d="M8 3v3M16 3v3M4 9h16"/>
-        <path d="M8.5 14.5l2 2 4.5-4.5"/>
-      </symbol>
       <symbol id="icon-cake" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 10.3V7"/>
         <path d="M12 7c-.75 0-1.35-.6-1.35-1.35 0-.75 1.35-2 1.35-2s1.35 1.25 1.35 2C13.35 6.4 12.75 7 12 7Z"/>
@@ -100,29 +83,29 @@
         <rect x="4" y="15" width="16" height="6" rx="1.3"/>
         <path d="M4.8 18c1.2.8 2.4.8 3.6 0s2.4-.8 3.6 0 2.4.8 3.6 0 2.4-.8 3.6 0"/>
       </symbol>
-      <symbol id="icon-salad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M4 12h16a8 8 0 0 1-16 0Z"/>
-        <path d="M12 12c0-3 1.5-5.5 4-7"/>
-        <path d="M12 12c0-2.2-1-4-2.8-5.2"/>
+      <symbol id="icon-diamond" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round">
+        <path d="M12 3 19 12 12 21 5 12Z"/>
       </symbol>
       <symbol id="icon-faq" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="9"/>
         <path d="M9.3 9.6a2.7 2.7 0 1 1 3.9 2.4c-.9.5-1.2 1-1.2 1.9"/>
         <circle cx="12" cy="17" r="0.9" fill="currentColor" stroke="none"/>
       </symbol>
-      <symbol id="icon-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z"/>
-        <circle cx="12" cy="9" r="2.4"/>
+      <symbol id="icon-order" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="4" width="16" height="17" rx="1.5"/>
+        <path d="M8 3v3M16 3v3M4 9h16"/>
+        <path d="M8.5 14.5l2 2 4.5-4.5"/>
       </symbol>
-      <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M6 3h3l1.5 4.5-2 1.5a12 12 0 0 0 6.5 6.5l1.5-2L21 15v3a2 2 0 0 1-2 2C11.5 20 4 12.5 4 5a2 2 0 0 1 2-2Z"/>
+      <symbol id="icon-salad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 12h16a8 8 0 0 1-16 0Z"/>
+        <path d="M12 12c0-3 1.5-5.5 4-7"/>
+        <path d="M12 12c0-2.2-1-4-2.8-5.2"/>
       </symbol>
-      <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="8.5"/>
-        <path d="M12 7.5V12l3 2"/>
-      </symbol>
-      <symbol id="icon-diamond" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round">
-        <path d="M12 3 19 12 12 21 5 12Z"/>
+      <symbol id="icon-shop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 9.5 5 4h14l1 5.5"/>
+        <path d="M4 9.5a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0"/>
+        <path d="M5.5 11v9h13v-9"/>
+        <path d="M10 20v-5.5a2 2 0 0 1 4 0V20"/>
       </symbol>
       <symbol id="icon-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round">
         <path d="M12 3.5l2.4 5.4 5.9.6-4.4 4 1.3 5.8L12 16.5l-5.2 2.8 1.3-5.8-4.4-4 5.9-.6Z"/>
@@ -134,5 +117,6 @@
       </symbol>
     </defs>
   </svg>
+  <script src="/assets/js/nav.js" defer></script>
 </body>
 </html>

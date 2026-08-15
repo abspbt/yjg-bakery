@@ -14,19 +14,46 @@
     cells.forEach(function (c) { grid.appendChild(c); });
   }
 
-  function setMeta(selector, attr, value) {
-    var el = document.querySelector(selector);
-    if (el && value != null) el.setAttribute(attr, value);
+  /* 換頁時要跟著換的 <head> 欄位：[選擇器, 要複製的屬性]。
+     每頁的 <title>／description／og／canonical 都是獨立的，
+     換頁若不同步，分享出去的網址與搜尋引擎看到的中繼資料會停在前一頁。 */
+  var HEAD_SYNC = [
+    ['meta[name="description"]', 'content'],
+    ['meta[property="og:title"]', 'content'],
+    ['meta[property="og:description"]', 'content'],
+    ['link[rel="canonical"]', 'href']
+  ];
+
+  function syncHead(doc) {
+    document.title = doc.title;
+    HEAD_SYNC.forEach(function (field) {
+      var source = doc.querySelector(field[0]);
+      var target = document.querySelector(field[0]);
+      if (source && target) target.setAttribute(field[1], source.getAttribute(field[1]));
+    });
+  }
+
+  /* 每頁 body 尾端的 #icon-sprite 只放「該頁自己用到的 symbol」，直接輸入網址
+     載入時即自給自足。但換頁只替換 <main>，sprite 不會跟著換，新內容的
+     <use href="#icon-x"> 就可能指向本頁沒有的 symbol（圖示變空白）。
+     因此換頁時先把新頁面缺少的 symbol 補進本地 sprite。
+     必須在替換 <main> 之前呼叫：<use> 只在插入當下解析一次，先插入內容
+     再補 symbol 的話，已渲染的圖示不會自行補畫。 */
+  function mergeSprite(doc) {
+    var defs = document.querySelector('#icon-sprite defs');
+    var incoming = doc.querySelectorAll('#icon-sprite symbol');
+    if (!defs) return;
+    Array.prototype.forEach.call(incoming, function (symbol) {
+      if (!document.getElementById(symbol.id)) {
+        defs.appendChild(document.importNode(symbol, true));
+      }
+    });
   }
 
   function applyDocument(doc) {
-    document.title = doc.title;
-    setMeta('meta[name="description"]', 'content', doc.querySelector('meta[name="description"]') && doc.querySelector('meta[name="description"]').getAttribute('content'));
-    setMeta('meta[property="og:title"]', 'content', doc.querySelector('meta[property="og:title"]') && doc.querySelector('meta[property="og:title"]').getAttribute('content'));
-    setMeta('meta[property="og:description"]', 'content', doc.querySelector('meta[property="og:description"]') && doc.querySelector('meta[property="og:description"]').getAttribute('content'));
-    setMeta('link[rel="canonical"]', 'href', doc.querySelector('link[rel="canonical"]') && doc.querySelector('link[rel="canonical"]').getAttribute('href'));
-
+    syncHead(doc);
     document.body.className = doc.body.className;
+    mergeSprite(doc);
 
     var newQuicknav = doc.querySelector('.grid-hint, .page-nav');
     var oldQuicknav = document.querySelector('.grid-hint, .page-nav');
@@ -82,7 +109,8 @@
     }
     if (url.protocol !== 'http:' && url.protocol !== 'https:') return false;
     if (url.origin !== location.origin) return false;
-    if (url.pathname === location.pathname && url.hash) return false;
+    /* 指向目前這一頁：純錨點交給瀏覽器原生跳轉，指到自己則不必重新抓一次 */
+    if (url.pathname === location.pathname && url.search === location.search) return false;
     return url;
   }
 
