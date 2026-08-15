@@ -774,6 +774,54 @@ main {
   ::view-transition-new(page) {
     animation: none !important;
   }
+  .line-fab:hover,
+  .line-fab:focus-visible {
+    transform: none !important;
+  }
+}
+
+/* ===== LINE 官方帳號按鈕（全站固定右下角） ===== */
+
+.line-fab {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px 8px 8px;
+  border-radius: 999px;
+  background: #06c755;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  transition: transform 0.2s ease;
+}
+
+.line-fab-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.line-fab-svg {
+  width: 18px;
+  height: 18px;
+  color: #fff;
+}
+
+.line-fab:hover,
+.line-fab:focus-visible {
+  transform: scale(1.06);
 }
 
 /* ===== footer ===== */
