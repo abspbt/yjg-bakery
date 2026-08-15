@@ -624,28 +624,143 @@ main:focus {
   color: var(--gold-muted);
 }
 
-/* FAQ */
+/* FAQ — 手風琴式問答（原生 <details>，無需 JS） */
 
-.faq-item {
+.faq-intro {
+  margin-bottom: 8px;
+}
+
+.faq-list {
+  border-top: 1px dashed var(--gold-line-soft);
+}
+
+.faq-acc {
   border-bottom: 1px dashed var(--gold-line-soft);
-  padding: 16px 0;
 }
 
-.faq-item:first-child {
-  padding-top: 0;
-}
-
-.faq-item h3 {
-  margin: 0 0 8px;
-  font-size: 15px;
-  color: var(--gold-bright);
+.faq-acc-summary {
   display: flex;
-  gap: 8px;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 2px;
+  cursor: pointer;
+  list-style: none;
 }
 
-.faq-item p {
-  margin: 0;
+.faq-acc-summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-acc-summary::marker {
+  content: "";
+}
+
+.faq-acc-num {
+  flex: none;
+  width: 26px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--gold-line);
+  transition: color 0.2s ease;
+}
+
+.faq-acc[open] .faq-acc-num {
+  color: var(--gold-muted);
+}
+
+.faq-acc-q {
+  flex: 1;
+  font-size: 15px;
+  line-height: 1.55;
+  letter-spacing: 0.01em;
+  color: var(--gold-bright);
+}
+
+.faq-acc-toggle {
+  position: relative;
+  flex: none;
+  width: 15px;
+  height: 15px;
+  margin-left: 4px;
+}
+
+.faq-acc-toggle::before,
+.faq-acc-toggle::after {
+  content: "";
+  position: absolute;
+  background: var(--gold-muted);
+  transition: transform 0.2s ease;
+}
+
+.faq-acc-toggle::before {
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  transform: translateY(-50%);
+}
+
+.faq-acc-toggle::after {
+  left: 50%;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  transform: translateX(-50%);
+}
+
+.faq-acc[open] .faq-acc-toggle::after {
+  transform: translateX(-50%) scaleY(0);
+}
+
+.faq-acc-body {
+  padding: 0 2px 20px 40px;
+}
+
+.faq-acc-body p {
+  margin: 0 0 12px;
   font-size: 14px;
+  line-height: 1.8;
+  color: var(--gold-muted);
+}
+
+.faq-acc-list {
+  list-style: none;
+  margin: 0 0 4px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.faq-acc-list li {
+  position: relative;
+  padding-left: 14px;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--gold-muted);
+}
+
+.faq-acc-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold-line);
+}
+
+.faq-acc-list strong {
+  color: var(--gold-bright);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.faq-acc-body .link-back,
+.faq-acc-body .line-cta {
+  margin-top: 8px;
 }
 
 /* ===== 轉場（fade / slide，尊重減少動態效果偏好） =====
