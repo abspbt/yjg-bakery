@@ -2,8 +2,8 @@
    配色與版面規則見專案根目錄 CLAUDE.md，請勿自行更改色調方向 */
 
 :root {
-  --bg: #26241f;
-  --bg-card: #332f29;
+  --bg: #1e1c18;
+  --bg-card: #2a2620;
   --gold: #c9a660;
   --gold-muted: #b8935a;
   --gold-bright: #ddc290;
@@ -406,7 +406,7 @@ main:focus {
   position: relative;
   aspect-ratio: 4 / 3;
   width: 100%;
-  background: linear-gradient(160deg, #3a352c, #221f1a);
+  background: linear-gradient(160deg, #322d24, #1a1814);
   overflow: hidden;
 }
 
