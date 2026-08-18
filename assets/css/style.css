@@ -541,15 +541,6 @@ main:focus {
   padding-top: 4px;
 }
 
-.story-dropcap::first-letter {
-  float: left;
-  font-size: 3em;
-  line-height: 0.8;
-  font-weight: 500;
-  padding: 4px 6px 0 0;
-  color: var(--gold-bright);
-}
-
 .story-quote {
   position: relative;
   margin: 20px 0 24px;
