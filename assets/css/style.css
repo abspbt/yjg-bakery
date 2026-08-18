@@ -521,7 +521,6 @@ main:focus {
 .story-lead {
   color: var(--gold);
   font-size: 14px;
-  font-style: italic;
   line-height: 1.75;
   letter-spacing: 0.02em;
   margin: 0 0 16px;
