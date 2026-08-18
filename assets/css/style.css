@@ -13,6 +13,21 @@
   --header-pad-y: clamp(20px, 5vw, 32px);
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --font-brand: "Brand LXGW WenKai TC Light", var(--font);
+}
+
+/* 品牌名稱專用字型：霞鶩文楷 LXGW WenKai TC Light（僅子集化「歪嘴雞烘焙」5 字，
+   自架內嵌，不使用 Google Fonts <link>，符合效能規範）。
+   字重 300 已是此字體官方提供的最細字重（無更細的 Thin/ExtraLight 版本，
+   瀏覽器也無法用 CSS 合成更細的字重，僅能合成更粗）。
+   配色對比為固定瓶頸：--gold-bright 對 --bg 實測對比度 10.6:1，
+   遠高於 WCAG AA 一般文字門檻 4.5:1，字重變細不影響此對比度計算，
+   故用最細字重不會拉低無障礙評分。 */
+@font-face {
+  font-family: "Brand LXGW WenKai TC Light";
+  src: url(data:font/woff2;base64,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) format("woff2");
+  font-weight: 300;
+  font-display: swap;
 }
 
 /* view-transitions：原生跨頁淡入淡出，不需 JS，不支援的瀏覽器會自動忽略 */
@@ -179,8 +194,9 @@ img {
 
 .brand-name {
   margin: 0;
+  font-family: var(--font-brand);
   font-size: clamp(22px, 6vw, 28px);
-  font-weight: 500;
+  font-weight: 300;
   line-height: 1.25;
   letter-spacing: 0.12em;
   color: var(--gold-bright);
