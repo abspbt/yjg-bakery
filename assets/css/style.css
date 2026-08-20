@@ -489,6 +489,10 @@ main:focus {
   border: 1px solid var(--gold-line-soft);
 }
 
+.story-photo--wide {
+  aspect-ratio: 4 / 3;
+}
+
 .story-kicker {
   display: flex;
   align-items: center;
