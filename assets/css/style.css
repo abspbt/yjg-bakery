@@ -644,6 +644,15 @@ main:focus {
   color: var(--gold-muted);
 }
 
+.notice-box p {
+  font-size: 14px;
+  color: var(--gold-muted);
+}
+
+.notice-box p + p {
+  margin-top: 8px;
+}
+
 /* FAQ — 手風琴式問答（原生 <details>，無需 JS） */
 
 .faq-intro {
