@@ -1,0 +1,7 @@
+name = "yjg-bakery-home"
+compatibility_date = "2024-11-01"
+
+# 官網首頁是純靜態多頁網站（沒有伺服器端程式碼），
+# 這支設定檔只給 Cloudflare Dashboard「連結到 Git」的部署流程用。
+[assets]
+directory = "."
