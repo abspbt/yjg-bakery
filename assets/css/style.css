@@ -934,7 +934,7 @@ main {
   }
 }
 
-/* ===== LINE 官方帳號按鈕（關於我們頁面，店家資訊內嵌） ===== */
+/* ===== LINE 好友按鈕（全站共用，about／cake-order／bagel／faq） ===== */
 
 .line-cta {
   display: inline-flex;
