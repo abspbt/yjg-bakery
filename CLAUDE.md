@@ -17,7 +17,7 @@
 | 頁面 | 說明 |
 |---|---|
 | index.html | 首頁，九宮格導覽 |
-| about | 關於我們（含完整實體店資訊：地址／電話／營業時間／地圖） |
+| about | 關於我們（含完整實體店資訊：地址／公休資訊／地圖；**不放電話**——工作時雙手多在接觸食材，不便接聽） |
 | bagel | 手作貝果介紹（頁尾導引加入LINE，獲取貝果預購消息） |
 | cake-order | 蛋糕訂製 |
 | warm-salad | 溫沙拉（**不重複**完整店面資訊，僅簡短提示＋連結回 about） |
@@ -71,8 +71,8 @@
 ## 路徑慣例
 - 站內資源與連結一律使用**相對路徑**：首頁用 `assets/...`、`about/`；分頁用 `../assets/...`、`../`、`../about/`
 - **不可**使用根目錄絕對路徑（`/assets/...`、`/about/`）
-- 原因：網站目前掛在 GitHub Pages 專案頁 `https://abspbt.github.io/yjg-bakery/`，不是網域根目錄。`/` 開頭的路徑會跑到 `abspbt.github.io/` 去，CSS／JS／logo 全部 404，「回首頁」也會直接離開網站（PR #31 曾改成絕對路徑而造成此問題，已還原）
-- 相對路徑在根目錄與子路徑底下都成立，日後正式網域接上也不必再改
-- 正式網域名稱**尚未確定**（確定不是 `waizuiji-bakery.com`）。canonical／sitemap.xml／robots.txt 這幾個一定要用**絕對網址**的地方，目前暫用現況可公開存取的 GitHub Pages 網址 `https://abspbt.github.io/yjg-bakery/` 頂替，等正式網域確定並上線後，需一次性將這些絕對網址全部改成正式網域（另需在 Google Search Console 用新網域重新驗證、重新提交 sitemap）
+- 原因：此規則原本是為了同時相容 GitHub Pages 專案頁子路徑（`https://abspbt.github.io/yjg-bakery/`，非網域根目錄）而訂立。`/` 開頭的路徑會跑到 `abspbt.github.io/` 去，CSS／JS／logo 全部 404，「回首頁」也會直接離開網站（PR #31 曾改成絕對路徑而造成此問題，已還原）
+- 相對路徑在根目錄與子路徑底下都成立，這也是為什麼正式網域上線後這條規則仍然不變、不需要改
+- 正式網域 **`yjg-bakery.com`** 已於 2026-08-21 申請並上線，此 repo 現為該網域的首頁。canonical／sitemap.xml／robots.txt／og:image／twitter:image 這幾個一定要用**絕對網址**的地方，已全部改用 `https://yjg-bakery.com/`，先前暫用的 GitHub Pages 網址不再使用
 - `<head>` 裡的相對路徑另有一個 SPA 陷阱：pushState 改網址後瀏覽器會用「新網址」重新解析，favicon 會 404。已由 `nav.js` 的 `freezeHeadUrls()` 在載入時把 `<head>` 的 `link[href]` 讀成絕對 URL 寫回去解決，**勿移除**
 - 新增頁面或連結後，務必在「子路徑」底下實測一次（把整包放進 `某資料夾/` 再從 `http://localhost:PORT/某資料夾/` 開），不能只測網域根目錄
