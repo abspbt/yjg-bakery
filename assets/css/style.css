@@ -493,6 +493,11 @@ main:focus {
   aspect-ratio: 4 / 3;
 }
 
+.story-photo--right {
+  float: right;
+  margin: 2px 0 12px 16px;
+}
+
 .story-kicker {
   display: flex;
   align-items: center;
@@ -555,6 +560,11 @@ main:focus {
   font-style: italic;
   line-height: 1.85;
   letter-spacing: 0.02em;
+}
+
+.story-quote--plain {
+  border-left: none;
+  padding-left: 0;
 }
 
 .feature-list {
