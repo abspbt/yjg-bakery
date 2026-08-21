@@ -239,7 +239,7 @@ img {
   gap: 8px;
   padding: 5px 0;
   text-decoration: none;
-  color: var(--gold-muted);
+  color: var(--gold-bright);
   font-size: 14px;
   letter-spacing: 0.1em;
   transition: color 0.2s ease;
@@ -302,7 +302,7 @@ img {
   margin: 6px 0 16px;
   font-size: 13px;
   letter-spacing: 0.1em;
-  color: var(--gold-muted);
+  color: var(--gold-bright);
 }
 
 /* 九宮格寬度撐滿版心，每格用 aspect-ratio 強制正方形（列高跟著欄寬走，
