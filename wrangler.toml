@@ -5,3 +5,10 @@ compatibility_date = "2024-11-01"
 # 這支設定檔只給 Cloudflare Dashboard「連結到 Git」的部署流程用。
 [assets]
 directory = "."
+# 站內連結一律用 .html 結尾（見各頁 <nav class="side-nav">）。Cloudflare
+# 預設 html_handling="auto-trailing-slash" 會把 /about.html 301 導向
+# /about，此重導向會被 sw.js 的 fetch() 自動跟隨，導致 respondWith()
+# 回傳一個「經過重導向」的 Response 給 navigate 請求，Safari 會直接丟出
+# 「Response served by service worker has redirections」讓頁面打不開。
+# 關掉這個自動改寫，讓 /about.html 原樣服務，不產生任何重導向。
+html_handling = "none"
