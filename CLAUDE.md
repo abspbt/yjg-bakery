@@ -2,77 +2,69 @@
 
 此檔案為專案全程共用規範，Claude Code 在每次工作時都應遵守以下規則，無需使用者重複說明。
 
+（2026-08-22：本站改版，架構從「視覺像單頁、實際多頁＋nav.js SPA 換頁」全面換成「傳統多頁靜態站＋PWA 離線快取」，本檔案內容已配合新架構重寫，舊版 SPA／icon sprite／相對路徑規則不再適用。）
+
 ## 品牌
 - 名稱：歪嘴雞烘焙
-- 標語：手作貝果．客製化蛋糕
-- H1（僅首頁使用一次）：高雄手作貝果．手作蛋糕
+- 標語：每一份貝果、蛋糕與沙拉，都是手作的心意。
+- 正式網域：`https://yjg-bakery.com`（Cloudflare Pages「連結到 Git」部署，監看本 repo 的 `main` 分支；`wrangler.toml` 只給 Cloudflare Dashboard 讀，本身不含任何邏輯）
 
-## 網站架構原則
-- 非純單頁 JS 應用，是「視覺像單頁、架構為多頁」的網站
-- 每個分類需有獨立網址、獨立 `<title>`、獨立 meta description
-- 首頁與各分類頁共用同一個頁首元件（Logo＋聚光燈效果＋店名＋標語），每頁完全相同且固定不動
-- 頁首以下才是會捲動／轉場的內容區，「回首頁」按鈕屬於內容區
+## 網站架構
+- **傳統多頁靜態站，不是 SPA**：每頁都是完全獨立、自足的 `.html` 檔，彼此用一般 `<a href="xxx.html">` 連結跳轉，交由瀏覽器原生換頁，沒有 client-side router，沒有 `nav.js` fetch 換內容那一套
+- 每頁各自擁有完整 `<head>`（獨立 `<title>`／meta description／OG／Twitter card／JSON-LD `Bakery` schema／canonical），SEO 各頁互不共用
+- 每頁的 CSS 都寫在自己的 `<style>` 內（無外部共用 CSS 檔，也未使用 Tailwind），對應頁面若要調整樣式直接改該頁 `<style>`，不要假設有全站共用樣式表
+- 每頁結尾都有一段幾乎相同的 inline `<script>`：註冊 `touchstart` passive listener（避免 iOS Safari `:active` 延遲）＋註冊 `/sw.js`。新增頁面時比照既有頁面複製這段，不要漏掉
 
 ## 頁面清單
-| 頁面 | 說明 |
+| 檔案 | 說明 |
 |---|---|
-| index.html | 首頁，九宮格導覽 |
-| about | 關於我們（含完整實體店資訊：地址／公休資訊／地圖；**不放電話**——工作時雙手多在接觸食材，不便接聽） |
-| bagel | 手作貝果介紹（頁尾導引加入LINE，獲取貝果預購消息） |
-| cake-order | 蛋糕訂製 |
-| warm-salad | 溫沙拉（**不重複**完整店面資訊，僅簡短提示＋連結回 about） |
-| faq | 常見問題 |
+| index.html | 首頁 |
+| about.html | 關於我們（含實體店資訊：地址／地圖；不放電話——工作時雙手多接觸食材，不便接聽） |
+| bagel.html | 手作貝果介紹 |
+| cake.html | 蛋糕訂製 |
+| salad.html | 溫沙拉 |
+| faq.html | 常見問題 |
 
-## 配色（大方向固定，實際色號以肉眼判斷微調，非死守單一數值）
-- 背景色：深炭灰／深咖啡棕色調（不可為純黑），目前值 `#17150F`（2026-08 再加深，比前一版 `#1E1C18` 更深，襯托光暈與金色更顯高級感；此色號會隨視覺判斷持續微調，不需拘泥於本次數值）
-- 文字／線條色：霧面古銅金／香檳金（低飽和度，不可用鮮豔亮黃或螢光色），參考 `#C9A660` ~ `#B8935A`
+側邊導覽（各頁重複出現的 `<nav class="side-nav">`）需與此清單同步；新增/刪除頁面時記得所有頁面的 nav 區塊都要一起改。
 
-## 圖示規範
-- 全站統一使用 line icon（細線條、無填色、outline 風格）
-- 一律使用 SVG，不使用 PNG/JPG 圖示，不使用 Emoji
-- 圖示顏色與文字同色系（霧面金）
+## PWA / Service Worker（`sw.js`）
+- 策略：cache-first + 背景 stale-while-revalidate（先回快取秒開，同時背景抓新版寫回快取，下次開啟即最新版）；只處理 GET，尊重 `no-store`
+- **每次網站內容有實質更新，一定要把 `sw.js` 開頭的 `CACHE_NAME`（目前 `pwa-cache-v22`）版本號往上加**，否則已安裝到主畫面的裝置會被卡在舊版本、新內容送不到使用者手上（這是先前踩過的坑，見檔案內註解）
+- `urlsToCache` 需列出所有頁面路徑，新增頁面時記得同步加進去
+- `manifest.json`：`name`/`short_name` 為「歪嘴雞烘焙」，`start_url: "/"`，`background_color`/`theme_color` 為 `#2A1F20`，圖示為 `assets/img/icon-192.png`／`icon-512.png`（由 `assets/img/favicon.svg` 光柵化產生，維持同一個金色圓環 mark，不要換成不同構圖，以免品牌不一致）
 
-## 版面規則
-- 九宮格左右／下方虛線需與畫面邊緣保留邊距，不可貼齊邊界
-- 頁首（Logo+光暈+店名+標語）高度需精簡，優先讓下方內容區最大化
-- Logo 上方聚光燈光暈效果須以 CSS 漸層實作，不可用圖片素材模擬
+## 路徑慣例（與舊版不同，注意）
+- 本站部署在**網域根目錄**（Cloudflare Pages 自訂網域，不是 GitHub Pages 專案子路徑），所以**可以使用 root-absolute 路徑**（如 `/manifest.json`、`/sw.js`），不需要像舊版那樣堅持全站相對路徑
+- 頁面內圖片資源目前用相對路徑 `assets/img/...`，維持現狀即可，不必刻意統一成絕對路徑
+- `canonical`／`sitemap.xml`／`robots.txt`／`og:image`／`twitter:image` 一律用絕對網址 `https://yjg-bakery.com/...`
 
-## 九宮格互動
-- 9 格中僅 5 格對應實際頁面，其餘留空
-- 每次載入頁面時，格子排列順序需隨機打亂
-- 點擊格子：頁首不變，僅下方內容區切換／導向對應頁面
-- 轉場效果限用 fade 或 slide，禁止使用 3D 翻頁等高負載效果
-- 「點選方塊 進入頁面」文字之後會替換為「回首頁」按鈕（小房子 line icon + 文字「回首頁」並排），不可只用純圖示
+## 配色
+- 背景：`#2A1F20`（深咖啡棕；`<meta name="theme-color">` 同色，讓 iOS 狀態列與底圖融合；首頁背景漸層上緣 `#312425`／下緣 `#1F171C`）
+- 文字：白色系 `#fff` / `rgba(255,255,255,.78~.88)`（`--ink` / `--ink-dim` / `--ink-soft`）
+- 強調色／金色重點：`#f4e3c1`
+- LINE 導流按鈕固定用 LINE 官方綠 `#06C755`，不要換成品牌金色，維持可辨識度
+
+## 字型
+- 品牌標題字型為自架子集化 `woff2`（`Brand LXGW WenKai TC Light`），以 base64 內嵌在各頁 `<style>` 的 `@font-face` 裡，避免多一個網路請求
+- 目前只子集化了「歪嘴雞烘焙」這幾個字（見 `fonts/` 內授權檔 `LICENSE-LXGW-WenKai-TC.txt` 與原始 woff2）。**若要用這個字型顯示子集化範圍以外的文字，字會顯示不出來（fallback 到 serif），必須重新子集化並更新 base64**，不要假設任何中文字都能正常顯示
+
+## 圖示
+- Favicon／App icon 統一用 `assets/img/favicon.svg`（24×24 viewBox，深底＋金色線條圓環），全站沒有另外的 line-icon sprite 系統（舊版 icon sprite／`mergeSprite()` 慣例已隨 SPA 架構一起淘汰）
 
 ## 圖片規範
-- 統一裁切比例（正方形或 4:3，全站一致）
-- 格式一律 WebP，單檔壓縮至 200KB 以內
-- 依實際顯示尺寸輸出，不使用超過需求的解析度
-- 一律加上 lazy load
-- 圖片維持原始色調（不加濾鏡），以細邊框融合整體深灰金風格
-- 每張圖片皆需填寫具描述性的 alt 文字（含地區＋品項關鍵字，例如「高雄手作貝果 原味貝果」）
+- 格式：WebP（`logo.webp`／`about-chef.webp`／`bagle.webp`／`warmsalad.webp`），首頁背景例外用 `home-bg.jpg` 並以 `<link rel="preload">` 預載
+- 一律加 `loading="lazy"`（首屏關鍵圖除外）、`width`/`height` 屬性避免版面跳動
+- alt 文字需含地區＋品項關鍵字（例如「高雄手作貝果 職人手工烘焙貝果特寫」）
 
 ## 效能優先原則（PageSpeed Insights）
-- 避免大量 JS 動畫與高運算效果
-- 圖示、光暈效果一律用 CSS/SVG 實作，不用圖片模擬
-- 圖片全面壓縮＋lazy load＋WebP
+- 避免大量 JS 動畫與高運算效果；沒有 client-side router、沒有大型 JS framework，維持現狀
+- 圖示／光暈效果一律用 CSS/SVG 實作，不用圖片模擬
+- 圖片全面壓縮＋lazy load＋WebP＋關鍵圖 preload
 
-## SPA 換頁注意事項（assets/js/nav.js）
-- 全站換頁是透過 `nav.js` fetch 內容後替換 `<main>`，並非整頁重新載入；新增任何頁面（尤其是含圖片的頁面）都必須用「從首頁九宮格點擊進入」測試一次，不能只測直接輸入網址載入，因為兩種路徑的渲染時機不同，行為可能不一致
-- `nav.js` 換頁最後會呼叫 `oldMain.focus()` 讓新內容區可被鍵盤存取，此呼叫**必須**帶 `{ preventScroll: true }`（已修正，勿還原）。曾發生過：未加 `preventScroll` 時，`focus()` 觸發瀏覽器預設捲動行為，與圖片區塊（`float` + `aspect-ratio` + `loading="lazy"` 組合）的排版計算互相競爭，導致圖片容器被鎖死成壓扁／裁切的高度且不會自行修正，且只有透過 SPA 換頁進入才會重現，直接載入網址不會（PR #22）
-- 頁面內若有使用 `float` + `aspect-ratio` + `loading="lazy"` 排版的圖片（如 about 頁的主廚照片），新增類似版面時要特別留意此類排版競態，換頁後務必實際檢查圖片是否完整顯示
-
-## 圖示 sprite 慣例
-- 每頁 `</body>` 前的 `<svg id="icon-sprite">` **只放該頁自己用到的 symbol**，不要把全站圖示整包複製進每一頁
-- 跨頁所需的 symbol 由 `nav.js` 的 `mergeSprite()` 在換頁時自動補進本地 sprite，因此直接輸入網址載入（每頁自足）與 SPA 換頁（動態補齊）兩條路徑都不會缺圖示
-- `mergeSprite()` **必須**在替換 `<main>` 之前呼叫：`<use>` 只在插入當下解析一次，先插入內容再補 symbol 的話圖示不會自行補畫
-- 新增頁面或在既有頁面加圖示時，記得把對應的 `<symbol>` 加進該頁 sprite，並用「從首頁九宮格點擊進入」實測圖示有無空白
-
-## 路徑慣例
-- 站內資源與連結一律使用**相對路徑**：首頁用 `assets/...`、`about/`；分頁用 `../assets/...`、`../`、`../about/`
-- **不可**使用根目錄絕對路徑（`/assets/...`、`/about/`）
-- 原因：此規則原本是為了同時相容 GitHub Pages 專案頁子路徑（`https://abspbt.github.io/yjg-bakery/`，非網域根目錄）而訂立。`/` 開頭的路徑會跑到 `abspbt.github.io/` 去，CSS／JS／logo 全部 404，「回首頁」也會直接離開網站（PR #31 曾改成絕對路徑而造成此問題，已還原）
-- 相對路徑在根目錄與子路徑底下都成立，這也是為什麼正式網域上線後這條規則仍然不變、不需要改
-- 正式網域 **`yjg-bakery.com`** 已於 2026-08-21 申請並上線，此 repo 現為該網域的首頁。canonical／sitemap.xml／robots.txt／og:image／twitter:image 這幾個一定要用**絕對網址**的地方，已全部改用 `https://yjg-bakery.com/`，先前暫用的 GitHub Pages 網址不再使用
-- `<head>` 裡的相對路徑另有一個 SPA 陷阱：pushState 改網址後瀏覽器會用「新網址」重新解析，favicon 會 404。已由 `nav.js` 的 `freezeHeadUrls()` 在載入時把 `<head>` 的 `link[href]` 讀成絕對 URL 寫回去解決，**勿移除**
-- 新增頁面或連結後，務必在「子路徑」底下實測一次（把整包放進 `某資料夾/` 再從 `http://localhost:PORT/某資料夾/` 開），不能只測網域根目錄
+## 新增／修改頁面時的檢查清單
+1. `<head>` 內 title／description／OG／Twitter／JSON-LD／canonical 是否都填好且用絕對網址
+2. 側邊 `<nav class="side-nav">` 是否所有頁面同步更新
+3. 頁尾 inline `<script>`（touchstart + `/sw.js` 註冊）是否存在
+4. 若改動了會被快取的既有頁面內容，`sw.js` 的 `CACHE_NAME` 版本號是否有升版
+5. 新頁面路徑是否加進 `sw.js` 的 `urlsToCache`、`sitemap.xml`
+6. 圖片是否為 WebP、`loading="lazy"`、有描述性 alt

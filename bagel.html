@@ -4,50 +4,39 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="view-transition" content="same-origin">
-<!-- theme-color 取自底圖上下緣疊完 scrim 後的實色（上 ≈#312425、下 ≈#1F171C），
-     讓 iOS Safari 狀態列／工具列的色塊與底圖銜接，視覺上等於滿版 -->
 <meta name="theme-color" content="#2A1F20">
 <meta name="format-detection" content="telephone=no">
-<meta name="description" content="歪嘴雞烘焙｜高雄鳳山手工烘焙坊，主打職人手作貝果、客製化蛋糕與田園溫沙拉，門市位於鳳山區自立街，提供 LINE 官方帳號預約與宅配到府服務。">
+<meta name="description" content="高雄手作貝果專賣｜歪嘴雞烘焙選用台灣在地麵粉與新鮮酵母低溫發酵，提供大顆美味款與小巧好入口款，限量預購請洽 LINE 官方帳號。">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://yjg-bakery.com/">
+<link rel="canonical" href="https://yjg-bakery.com/bagel.html">
 <!-- 加入主畫面後以全螢幕開啟，內容延伸至狀態列下方（配合 viewport-fit=cover 與 safe-area padding） -->
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="歪嘴雞烘焙">
-<title>歪嘴雞烘焙</title>
+<title>手作貝果・歪嘴雞烘焙</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" as="image" href="assets/img/home-bg.jpg">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="歪嘴雞烘焙">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:title" content="歪嘴雞烘焙｜高雄鳳山手工烘焙坊">
-<meta property="og:description" content="高雄鳳山手工烘焙坊，主打職人手作貝果、客製化蛋糕與田園溫沙拉，門市位於鳳山區自立街，提供 LINE 官方帳號預約與宅配到府服務。">
-<meta property="og:url" content="https://yjg-bakery.com/">
-<meta property="og:image" content="https://yjg-bakery.com/assets/img/home-bg.jpg">
+<meta property="og:title" content="手作貝果・歪嘴雞烘焙">
+<meta property="og:description" content="台灣在地麵粉與新鮮酵母低溫發酵，提供大顆美味款與小巧好入口款，限量手工製作，詳細開賣時間請洽 LINE 官方帳號。">
+<meta property="og:url" content="https://yjg-bakery.com/bagel.html">
+<meta property="og:image" content="https://yjg-bakery.com/assets/img/bagle.webp">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="歪嘴雞烘焙｜高雄鳳山手工烘焙坊">
-<meta name="twitter:description" content="高雄鳳山手工烘焙坊，主打職人手作貝果、客製化蛋糕與田園溫沙拉，提供 LINE 官方帳號預約與宅配到府服務。">
-<meta name="twitter:image" content="https://yjg-bakery.com/assets/img/home-bg.jpg">
+<meta name="twitter:title" content="手作貝果・歪嘴雞烘焙">
+<meta name="twitter:description" content="台灣在地麵粉與新鮮酵母低溫發酵，限量手工製作，詳細開賣時間請洽 LINE 官方帳號。">
+<meta name="twitter:image" content="https://yjg-bakery.com/assets/img/bagle.webp">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Bakery",
-  "name": "歪嘴雞烘焙",
-  "url": "https://yjg-bakery.com/",
-  "image": "https://yjg-bakery.com/assets/img/home-bg.jpg",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "自立街85號",
-    "addressLocality": "鳳山區",
-    "addressRegion": "高雄市",
-    "addressCountry": "TW"
-  },
-  "sameAs": ["https://line.me/R/ti/p/@292xswnp"],
-  "servesCuisine": ["貝果", "蛋糕", "沙拉"],
-  "priceRange": "$$"
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "首頁", "item": "https://yjg-bakery.com/"},
+    {"@type": "ListItem", "position": 2, "name": "手作貝果", "item": "https://yjg-bakery.com/bagel.html"}
+  ]
 }
 </script>
 <style>
@@ -65,52 +54,40 @@
     --ink:#fff;
     --ink-dim:rgba(255,255,255,.78);
     --ink-soft:rgba(255,255,255,.88);
+    --glass-bg:rgba(16,15,26,.82);
+    --glass-border:rgba(255,255,255,.1);
     --safe-b:env(safe-area-inset-bottom, 0px);
     --safe-t:env(safe-area-inset-top, 0px);
+    /* 毛玻璃霧化程度：數字越大越霧，調這裡即可 */
+    --frost-blur:26px;
   }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-  html,body{
-    height:100%;
-    /* 與 theme-color 同色：橡皮筋回彈或瀏覽器取樣邊緣色時都不會露出冷色底 */
-    background:#2A1F20;
-    /* 關閉橡皮筋回彈，避免下拉時把底圖之外的底色扯進畫面 */
-    overscroll-behavior:none;
-  }
+  html,body{min-height:100%;background:#2A1F20;}
   body{
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
     color:var(--ink);
     overflow-x:hidden;
   }
-
-  .hero{
-    position:relative;
-    min-height:100dvh;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-  }
-  /* 底圖與文字可讀性遮罩：position:fixed 貼齊視窗，高度用 100vh／100lvh。
-     iOS Safari 的 vh 一律等於「網址列收起時」的最大視窗高度，所以固定
-     定位元素用它必定夠高，網址列展開時只是被工具列蓋住一小截，收起時
-     剛好填滿——不會有任何狀態露出底色。
-     刻意不使用 dvh（會隨網址列縮小）也不使用 JS 量測的高度（雙指縮放時
-     innerHeight 會回報縮放後的視覺高度，導致底圖被算小而露出底色）。 */
-  .hero-bg,
-  .hero-scrim{
+  /* 背景沿用首頁同一張照片，上蓋一層可調霧化程度的毛玻璃，文字疊在
+     霧化玻璃上；position:fixed 貼齊視窗，長文捲動時不會跟著移動 */
+  .page-bg,
+  .page-frost{
     position:fixed;
     top:0;left:0;right:0;
     height:100vh;
     height:100lvh;
     pointer-events:none;
   }
-  .hero-bg{
+  .page-bg{
     z-index:0;
     background:url("assets/img/home-bg.jpg") center 28% / cover no-repeat;
     view-transition-name:bg-photo;
   }
-  .hero-scrim{
+  .page-frost{
     z-index:1;
-    background:linear-gradient(180deg, rgba(10,8,20,.70) 0%, rgba(10,8,20,.08) 24%, rgba(10,8,20,.12) 58%, rgba(10,8,20,.76) 100%);
+    background:rgba(20,15,15,.55);
+    backdrop-filter:blur(var(--frost-blur)) saturate(1.15);
+    -webkit-backdrop-filter:blur(var(--frost-blur)) saturate(1.15);
     view-transition-name:bg-overlay;
   }
 
@@ -128,15 +105,14 @@
     font-weight:300;
     letter-spacing:.02em;
   }
-  .hero-copy{
+  main{
     position:relative;
     z-index:2;
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    text-align:left;
-    padding:24px calc(96px + 16px) calc(28px + var(--safe-b)) 28px;
-    gap:10px;
+    padding:8px calc(96px + 16px) calc(28px + var(--safe-b)) 28px;
+  }
+  .page-head{
+    padding:28px 0 8px;
+    text-align:center;
   }
   .eyebrow{
     font-size:11px;
@@ -145,20 +121,20 @@
     color:var(--ink-dim);
     animation:rise .7s ease-out both;
   }
-  .title{
-    font-family:var(--font-brand);
+  .page-title{
+    margin-top:14px;
+    font-family:"Songti TC","Noto Serif TC","STSong","PMingLiU",serif;
     font-weight:300;
-    font-size:clamp(22px,6.5vw,30px);
-    line-height:1.2;
-    letter-spacing:.06em;
-    /* 品牌手寫字「歪」左側內建留白比系統字大，實測視覺墨色起點
-       比上下兩行多縮進約 1.5px，用負 margin 拉回同一條左邊線 */
-    margin-left:-1.5px;
+    font-size:clamp(19px,5vw,22px);
+    line-height:1.5;
+    letter-spacing:.04em;
     animation:rise .7s .06s ease-out both;
   }
-  .desc{
-    font-size:14px;
-    line-height:1.7;
+  .page-subtitle{
+    margin-top:10px;
+    font-weight:300;
+    font-size:13.5px;
+    line-height:1.8;
     color:var(--ink-dim);
     animation:rise .7s .12s ease-out both;
   }
@@ -167,6 +143,70 @@
     to{opacity:1;transform:none;}
   }
 
+  .story{
+    max-width:34em;
+    margin:36px auto 0;
+    animation:rise .7s .18s ease-out both;
+  }
+  .story::after{content:"";display:table;clear:both;}
+  .story-photo{
+    float:left;
+    width:42%;
+    height:auto;
+    aspect-ratio:4/3;
+    margin:2px 16px 12px 0;
+    border-radius:14px;
+    border:1px solid var(--glass-border);
+    object-fit:cover;
+  }
+  .story p{
+    font-weight:300;
+    font-size:15px;
+    line-height:2;
+    letter-spacing:.02em;
+    color:var(--ink-soft);
+    text-indent:2em;
+  }
+  .story p + p{margin-top:1.5em;}
+  .story p.lead{
+    font-size:15px;
+    color:var(--ink);
+    letter-spacing:.03em;
+  }
+  /* LINE 按鈕規範同 about.html/cake.html：不仿製 LINE 商標圖示，僅用純文字
+     連結，背景沿用官方識別色 #06C755 */
+  .bagel-line-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:2em;
+    width:100%;
+    padding:13px 22px;
+    border-radius:999px;
+    background:#06C755;
+    color:#fff;
+    font-size:14px;
+    font-weight:600;
+    text-decoration:none;
+    transition:transform .15s cubic-bezier(.4,0,.2,1), opacity .15s ease;
+  }
+  .bagel-line-btn:active{transform:scale(.97);opacity:.85;}
+  .story blockquote{
+    margin:2.2em 0;
+    padding:1.4em 0;
+    border-top:1px solid var(--glass-border);
+    border-bottom:1px solid var(--glass-border);
+    text-align:center;
+    text-indent:0;
+    font-family:"Songti TC","Noto Serif TC","STSong","PMingLiU",serif;
+    font-weight:300;
+    font-size:17px;
+    line-height:1.9;
+    letter-spacing:.05em;
+    color:var(--ink);
+  }
+
+  /* 側邊直排文字導覽：與首頁 index.html 共用同一套視覺 */
   .side-nav{
     position:fixed;
     top:50%;
@@ -198,10 +238,6 @@
     text-align:right;
     cursor:pointer;
     -webkit-tap-highlight-color:transparent;
-    /* 純筆畫暈影：三層同心、由內而外遞減，只跟著每個字的筆畫走，
-       不使用任何整片底板。顏色用畫面同調的暖深色而非純黑——純黑壓在
-       暖色照片上會把周圍一起蒙灰。刻意不用 -webkit-text-stroke——14px
-       的繁中筆畫密度高，描邊會把「嘴／雞／蛋」的字腔填實反而更難讀。 */
     text-shadow:
       0 0 1px rgba(26,17,12,.62),
       0 0 3px rgba(26,17,12,.45),
@@ -221,8 +257,8 @@
 
   /* 換頁平滑轉場：View Transitions API（配合 <meta name="view-transition">）。
      不支援的瀏覽器（Firefox／舊版 Safari）會直接跳頁，屬漸進增強，不影響功能。
-     .hero-bg/.hero-scrim 另外掛了 view-transition-name（跨頁對應到子頁的
-     .page-bg/.page-frost），讓背景層獨立做 cross-fade，不會被 root 的
+     .page-bg/.page-frost 另外掛了 view-transition-name（跨頁對應到首頁的
+     .hero-bg/.hero-scrim），讓背景層獨立做 cross-fade，不會被 root 的
      位移動畫拖著跳，換頁時底圖才不會跟著整頁一起滑動而顯得生硬。 */
   @media (prefers-reduced-motion: no-preference){
     ::view-transition-old(root){animation:vt-out .2s cubic-bezier(.4,0,.2,1) both;}
@@ -233,34 +269,43 @@
 
   @media (prefers-reduced-motion: reduce){
     *{animation:none !important;transition:none !important;}
-    .eyebrow,.title,.desc{opacity:1 !important;transform:none !important;}
-    .navtab:active{transform:none;opacity:.6;}
     ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none !important;}
+    .eyebrow,.page-title,.page-subtitle,.story{opacity:1 !important;transform:none !important;}
+    .navtab:active{transform:none;opacity:.6;}
   }
 </style>
 </head>
 <body>
 
-<div class="hero">
-  <div class="hero-bg" aria-hidden="true"></div>
-  <div class="hero-scrim" aria-hidden="true"></div>
-  <header>
-    <span class="brand">歪嘴雞烘焙</span>
-  </header>
+<div class="page-bg" aria-hidden="true"></div>
+<div class="page-frost" aria-hidden="true"></div>
 
-  <div class="hero-copy">
-    <p class="eyebrow">高雄手作烘焙・客製化蛋糕・溫沙拉</p>
-    <h1 class="title">歪嘴雞烘焙</h1>
-    <p class="desc">以溫度與時間慢慢等待</br>
-                    每一份貝果、蛋糕與沙拉，都是手作的心意。</p>
+<header>
+  <span class="brand">歪嘴雞烘焙</span>
+</header>
+
+<main>
+  <div class="page-head">
+    <p class="eyebrow">手作貝果</p>
+    <h1 class="page-title">晨光揉入麥香：一只挑剔舌尖的溫柔歸宿</h1>
+    <p class="page-subtitle">以誠實的手感與風土食材，烘焙出日常餐桌上最踏實的溫度。</p>
   </div>
 
-</div>
+  <article class="story">
+    <img class="story-photo" src="assets/img/bagle.webp" alt="高雄手作貝果 職人手工烘焙貝果特寫" width="800" height="600" loading="lazy">
+    <p class="lead">烤箱門拉開的剎那，高溫催化出台灣無添加小麥粉質樸的甘甜，混融著19號發酵奶油細膩的堅果乳香，在空氣中舒展開來。指尖輕壓微脆金黃的表皮，隨即迎來麵筋富有彈性的溫柔回彈——這是時間、酵母與手掌溫度交織出的生命力。</p>
+    <p>「歪嘴雞」看似對味道極盡挑剔，本質卻是對生活純粹的深情執著。每一只貝果都是一份跨越風土的誠意清單：從紐西蘭全脂奶粉的溫潤基底、澳洲乳酪的絲滑微酸，到法芙娜可可深邃的微苦、日本抹茶沉靜的茶韻，以及急速冷凍綜合野莓在齒間迸發的鮮活果酸；甚至更大膽地將台灣在地剝皮辣椒與雙色乳酪起司揉入麵團，在鹹香與微辛間撞擊出令人會心一笑的在地記憶。</p>
+    <blockquote>真正的美味從不喧嘩，它藏在手工揉製的指紋紋理裡，成了晨光中最安靜的陪伴。</blockquote>
+    <p>為了陪伴不同的日常節奏，我們貼心備有飽滿扎實的「大顆美味款」（100g／5入裝），與優雅適口的「小巧好入口款」（65g／8入裝）。每只貝果皆由雙手揉捏烘焙，那細微的重量起伏並非規格的不一，而是手工藝留給生活最真實、最溫暖的印記。</p>
+    <p>貝果為限量手工製作，不定期開放預購，詳細開賣時間會透過 LINE 官方帳號公告。</p>
+    <a class="bagel-line-btn" href="https://line.me/R/ti/p/@292xswnp" target="_blank" rel="noopener noreferrer" aria-label="加入 LINE 官方帳號（於新分頁開啟）">加入 LINE 官方帳號</a>
+  </article>
+</main>
 
 <nav class="side-nav">
-  <a href="index.html" class="navtab active" aria-current="page"><span class="idx">01</span><span>首頁</span></a>
+  <a href="index.html" class="navtab"><span class="idx">01</span><span>首頁</span></a>
   <a href="about.html" class="navtab"><span class="idx">02</span><span>關於</span></a>
-  <a href="bagel.html" class="navtab"><span class="idx">03</span><span>貝果</span></a>
+  <a href="bagel.html" class="navtab active" aria-current="page"><span class="idx">03</span><span>貝果</span></a>
   <a href="cake.html" class="navtab"><span class="idx">04</span><span>蛋糕</span></a>
   <a href="salad.html" class="navtab"><span class="idx">05</span><span>溫沙拉</span></a>
   <a href="faq.html" class="navtab"><span class="idx">06</span><span>Q&amp;A</span></a>
