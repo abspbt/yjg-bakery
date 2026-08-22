@@ -63,6 +63,9 @@
 
 ## 新增／修改頁面時的檢查清單
 1. `<head>` 內 title／description／OG／Twitter／JSON-LD／canonical 是否都填好且用絕對網址
+   - `<title>` 需包含主要關鍵字＋地區（「品項｜高雄鳳山手工烘焙坊・歪嘴雞烘焙」這種格式），不要只放品牌名，SERP 顯示空間留白等於浪費排名機會
+   - 每頁都要有 `Bakery` JSON-LD（不是只有首頁/關於我們），`servesCuisine`／`address` 照現有頁面複製即可
+   - `og:image`／`twitter:image` 一律用**橫式（約 1.91:1）**圖片，直式人像/情境照會在 FB／LINE／Twitter 分享預覽被裁切難看；沒有現成橫式圖就參考 `assets/img/og-cover.jpg`／`about-chef-og.jpg` 的做法另外裁一張，並補上對應的 `og:image:width`／`og:image:height`／`og:image:alt`
 2. 側邊 `<nav class="side-nav">` 是否所有頁面同步更新
 3. 頁尾 inline `<script>`（touchstart + `/sw.js` 註冊）是否存在
 4. 若改動了會被快取的既有頁面內容，`sw.js` 的 `CACHE_NAME` 版本號是否有升版
