@@ -31,7 +31,7 @@
 - 策略：cache-first + 背景 stale-while-revalidate（先回快取秒開，同時背景抓新版寫回快取，下次開啟即最新版）；只處理 GET，尊重 `no-store`
 - **每次網站內容有實質更新，一定要把 `sw.js` 開頭的 `CACHE_NAME`（目前 `pwa-cache-v22`）版本號往上加**，否則已安裝到主畫面的裝置會被卡在舊版本、新內容送不到使用者手上（這是先前踩過的坑，見檔案內註解）
 - `urlsToCache` 需列出所有頁面路徑，新增頁面時記得同步加進去
-- `manifest.json`：`name`/`short_name` 為「歪嘴雞烘焙」，`start_url: "/"`，`background_color`/`theme_color` 為 `#2A1F20`，圖示為 `assets/img/icon-192.png`／`icon-512.png`（由 `assets/img/favicon.svg` 光柵化產生，維持同一個金色圓環 mark，不要換成不同構圖，以免品牌不一致）
+- `manifest.json`：`name`/`short_name` 為「歪嘴雞烘焙」，`start_url: "/"`，`background_color`/`theme_color` 為 `#2A1F20`，圖示為 `assets/img/icon-192.png`／`icon-512.png`（歪嘴雞吉祥物圓形徽章圖，與 `favicon.svg` 同一構圖，維持一致，不要各自換成不同版本）
 
 ## 路徑慣例（與舊版不同，注意）
 - 本站部署在**網域根目錄**（Cloudflare Pages 自訂網域，不是 GitHub Pages 專案子路徑），所以**可以使用 root-absolute 路徑**（如 `/manifest.json`、`/sw.js`），不需要像舊版那樣堅持全站相對路徑
@@ -49,7 +49,8 @@
 - 目前只子集化了「歪嘴雞烘焙」這幾個字（見 `fonts/` 內授權檔 `LICENSE-LXGW-WenKai-TC.txt` 與原始 woff2）。**若要用這個字型顯示子集化範圍以外的文字，字會顯示不出來（fallback 到 serif），必須重新子集化並更新 base64**，不要假設任何中文字都能正常顯示
 
 ## 圖示
-- Favicon／App icon 統一用 `assets/img/favicon.svg`（24×24 viewBox，深底＋金色線條圓環），全站沒有另外的 line-icon sprite 系統（舊版 icon sprite／`mergeSprite()` 慣例已隨 SPA 架構一起淘汰）
+- Favicon／App icon 統一用 `assets/img/favicon.svg`：2026-08-23 起改為歪嘴雞吉祥物圓形徽章圖（棕底、吉祥物咬貝果＋「歪嘴雞烘焙」字樣＋五星），以 `<image>` 內嵌 base64 PNG 的方式包在 svg 裡（因為原圖是點陣插畫，不是線條向量圖，viewBox 改為 `0 0 128 128`）；`icon-192.png`／`icon-512.png` 為同一張圖的光柵輸出，三者務必維持同一構圖，不要各自換版本
+- 全站沒有另外的 line-icon sprite 系統（舊版 icon sprite／`mergeSprite()` 慣例已隨 SPA 架構一起淘汰）
 
 ## 圖片規範
 - 格式：WebP（`logo.webp`／`about-chef.webp`／`bagle.webp`／`warmsalad.webp`），首頁背景例外用 `home-bg.jpg` 並以 `<link rel="preload">` 預載
