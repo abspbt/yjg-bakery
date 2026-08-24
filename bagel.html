@@ -207,6 +207,17 @@
     word-break:keep-all;
   }
   .story .spec-block p.spec-desc{margin-top:.4em;}
+  .story .store-line{margin-top:2em;text-align:center;}
+  .story .store-line p{margin:0;text-indent:0;text-align:center;}
+  .story .store-name{font-weight:500;color:#f4e3c1;letter-spacing:.04em;}
+  .story .store-divider{
+    margin:.6em auto;
+    width:56px;
+    height:0;
+    border:none;
+    border-top:1px dashed var(--glass-border);
+  }
+  .story .store-address{font-size:13px;color:var(--ink-dim);}
   /* LINE 按鈕規範同 about.html/cake.html：不仿製 LINE 商標圖示，僅用純文字
      連結，背景沿用官方識別色 #06C755 */
   .bagel-line-btn{
@@ -341,7 +352,11 @@
       <p class="spec-desc">輕盈俐落，為日常片刻帶來合宜的能量。</p>
     </div>
     <p>註：全品項皆為職人手工揉製烘焙，每顆重量略有天然微差屬正常現象，請以實際出貨重量為準。</br>貝果為限量手工製作，不定期開放預購，詳細開賣時間會透過 LINE 官方帳號公告。</p>
-    <p>歪嘴雞烘焙｜高雄市鳳山區鎮西里自立街85號</p>
+    <div class="store-line">
+      <p class="store-name">歪嘴雞烘焙</p>
+      <hr class="store-divider">
+      <p class="store-address">高雄市鳳山區鎮西里自立街85號</p>
+    </div>
     <a class="bagel-line-btn" href="https://line.me/R/ti/p/@292xswnp" target="_blank" rel="noopener noreferrer" aria-label="加入 LINE 官方帳號（於新分頁開啟）">加入 LINE 官方帳號</a>
   </article>
 </main>
