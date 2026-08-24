@@ -48,7 +48,27 @@
   },
   "sameAs": ["https://line.me/R/ti/p/@292xswnp"],
   "servesCuisine": ["貝果", "蛋糕", "沙拉"],
-  "priceRange": "$$"
+  "priceRange": "$$",
+  "hasMenu": {
+    "@type": "Menu",
+    "name": "溫沙拉",
+    "hasMenuSection": {
+      "@type": "MenuSection",
+      "name": "溫沙拉",
+      "hasMenuItem": [
+        {
+          "@type": "MenuItem",
+          "name": "季節溫沙拉",
+          "offers": {"@type": "Offer", "price": "70", "priceCurrency": "TWD"}
+        },
+        {
+          "@type": "MenuItem",
+          "name": "肉肉溫沙拉（舒肥雞胸肉）",
+          "offers": {"@type": "Offer", "price": "90", "priceCurrency": "TWD"}
+        }
+      ]
+    }
+  }
 }
 </script>
 <script type="application/ld+json">
@@ -196,6 +216,32 @@
     color:var(--ink);
     letter-spacing:.03em;
   }
+  .story h2{
+    margin-top:2em;
+    font-family:"Songti TC","Noto Serif TC","STSong","PMingLiU",serif;
+    font-weight:300;
+    font-size:17px;
+    letter-spacing:.06em;
+    color:var(--ink);
+  }
+  .story h2 + p{margin-top:.7em;}
+  /* 品項價目表：內容欄寬受右側 side-nav 預留空間擠壓，不用表格改用單行清單 */
+  .menu-list{
+    list-style:none;
+  }
+  .menu-list li{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    column-gap:10px;
+    padding:8px 0;
+    border-bottom:1px solid var(--glass-border);
+    font-size:13.5px;
+    letter-spacing:.02em;
+  }
+  .menu-list .menu-name{color:var(--ink-soft);}
+  .menu-list .menu-price{color:#f4e3c1;white-space:nowrap;}
+  .menu-list + p{margin-top:1.4em;}
   .story blockquote{
     clear:both;
     margin:2.2em 0;
@@ -322,17 +368,27 @@
 <main>
   <div class="page-head">
     <p class="eyebrow">溫沙拉</p>
-    <h1 class="page-title">旬味火候與手作溫度：遇見一碗撫慰身心的暖意溫沙拉</h1>
+    <h1 class="page-title">高雄鳳山溫沙拉：以旬味火候與手作溫度，喚醒身心的暖意</h1>
     <p class="page-subtitle">告別生冷青蔬的疏離，以南方日光與微炙熱度，喚醒土地深處的甘美本質。</p>
   </div>
 
   <article class="story">
     <img class="story-photo" src="assets/img/warmsalad.webp" alt="高雄手作溫沙拉 田園時蔬溫沙拉" width="800" height="600" loading="lazy">
     <p class="lead">熱氣拂過鍋底，鮮採櫛瓜與玉米筍在微溫中緩緩舒展，釋放出細緻的草木甘甜與清香。當常見的生菜沙拉仍停留在冰冷脆硬的單向感官時，這碗在鳳山街角靜靜成形的手作料理，選擇以恰到好處的熱度為媒介，重新拉近人與時令田野的距離。</p>
+    <h2>溫沙拉的風味與食材</h2>
     <p>每一勺盛盤，都是一場精準的質地對比。南瓜蒸炙得如糖炒栗子般綿密細滑，與吸飽水氣的軟Q通心粉在舌尖形成溫柔裹覆；齒刃下切，厚切杏鮑菇瞬間迸發出飽滿鮮汁，隨即迎來高纖鷹嘴豆與毛豆仁清脆粉質的堅果香氣。小黃瓜的微脆與玉米筍的天然焦糖甜感，在口中層層交疊。</p>
     <p>調味不施多餘粉飾，僅憑海鹽晶粒的純粹鹹香、研磨黑胡椒的木質辛香，以及蒜粒粉遇熱激發出的厚實底蘊。這份扎根於高雄的質樸手作哲學，摒棄了生食對腸胃的生澀負擔，將充沛的蛋白質與纖維轉化為毫無負擔的純粹能量。</p>
-    <blockquote>溫度的注入</br>是料理對身體最深情的寬容</br>讓土地的甘味有了安放的歸宿</blockquote>
-    <p>無論是揮灑汗水後的機能補給，亦或忙碌日常裡的喘息片刻，這碗交織著飽足與輕盈的溫沙拉，都以最誠懇的尾韻回甘，在舌尖留下一抹南方陽光般的綿長暖意。</p>
+    <blockquote>溫度的注入<br>是料理對身體最深情的寬容<br>讓土地的甘味有了安放的歸宿</blockquote>
+    <h2>品項與定價</h2>
+    <p>溫沙拉現有兩款可選，也能加購溫熱薯泥蛋沙拉更加飽足（新台幣）：</p>
+    <ul class="menu-list">
+      <li><span class="menu-name">季節溫沙拉</span><span class="menu-price">$70</span></li>
+      <li><span class="menu-name">加購薯泥蛋沙拉一球</span><span class="menu-price">$10</span></li>
+      <li><span class="menu-name">肉肉溫沙拉（舒肥雞胸肉）</span><span class="menu-price">$90</span></li>
+      <li><span class="menu-name">加購薯泥蛋沙拉一球</span><span class="menu-price">$10</span></li>
+    </ul>
+    <p>肉肉溫沙拉可擇一醬料：黑胡椒海鹽／檸檬迷迭香。</p>
+    <p>無論是揮灑汗水後的機能補給，亦或忙碌日常裡的喘息片刻，這碗交織著飽足與輕盈的溫沙拉，都以最誠懇的尾韻回甘，在舌尖留下一抹南方陽光般的綿長暖意。若想讓這頓餐更完整，不妨餐前配一份<a class="cta-link" href="bagel.html">手作貝果</a>，或以一塊<a class="cta-link" href="cake.html">訂製蛋糕</a>作結。</p>
   </article>
 
   <section class="cta-card">
