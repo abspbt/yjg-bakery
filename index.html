@@ -20,6 +20,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" as="image" href="assets/img/home-bg.jpg">
+<link rel="preload" as="image" href="assets/img/brand-title.webp">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="歪嘴雞烘焙">
 <meta property="og:locale" content="zh_TW">
@@ -145,24 +146,23 @@
     font-size:11px;
     letter-spacing:.32em;
     text-transform:uppercase;
-    color:var(--ink-dim);
+    color:#f4e3c1;
     animation:rise .7s ease-out both;
   }
   .title{
-    font-family:var(--font-brand);
-    font-weight:300;
-    font-size:clamp(22px,6.5vw,30px);
-    line-height:1.2;
-    letter-spacing:.06em;
-    /* 品牌手寫字「歪」左側內建留白比系統字大，實測視覺墨色起點
-       比上下兩行多縮進約 1.5px，用負 margin 拉回同一條左邊線 */
-    margin-left:-1.5px;
+    display:block;
+    line-height:0;
     animation:rise .7s .06s ease-out both;
+  }
+  .title img{
+    display:block;
+    height:clamp(24px,7.15vw,33px);
+    width:auto;
   }
   .desc{
     font-size:14px;
     line-height:1.7;
-    color:var(--ink-dim);
+    color:rgba(244,227,193,.82);
     animation:rise .7s .12s ease-out both;
   }
   @keyframes rise{
@@ -253,7 +253,7 @@
 
   <div class="hero-copy">
     <p class="eyebrow">高雄手作貝果・客製化蛋糕・溫沙拉</p>
-    <h1 class="title">歪嘴雞烘焙</h1>
+    <h1 class="title"><img src="assets/img/brand-title.webp" width="1014" height="265" alt="歪嘴雞烘焙"></h1>
     <p class="desc">以溫度與時間慢慢等待</br>
                     每一份貝果、蛋糕與溫沙拉，都是手作的心意。</p>
   </div>
