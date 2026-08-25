@@ -242,6 +242,24 @@
   .menu-list .menu-name{color:var(--ink-soft);}
   .menu-list .menu-price{color:#f4e3c1;white-space:nowrap;}
   .menu-list + p{margin-top:1.4em;}
+  /* 情境相片牆：縮圖排成 3 欄、統一 4:3 比例（跟 .story-photo 一致）
+     避免版面跳動，圖片一律 lazy load，只有捲到這段才會下載 */
+  .photo-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    margin-top:1em;
+  }
+  .photo-grid img{
+    width:100%;
+    height:auto;
+    aspect-ratio:4/3;
+    border-radius:10px;
+    border:1px solid var(--glass-border);
+    object-fit:cover;
+    display:block;
+  }
+  .photo-grid + p{margin-top:1.4em;}
   .story blockquote{
     clear:both;
     margin:2.2em 0;
@@ -379,6 +397,15 @@
     <p>每一勺盛盤，都是一場精準的質地對比。南瓜蒸炙得如糖炒栗子般綿密細滑，與吸飽水氣的軟Q通心粉在舌尖形成溫柔裹覆；齒刃下切，厚切杏鮑菇瞬間迸發出飽滿鮮汁，隨即迎來高纖鷹嘴豆與毛豆仁清脆粉質的堅果香氣。小黃瓜的微脆與玉米筍的天然焦糖甜感，在口中層層交疊。</p>
     <p>調味不施多餘粉飾，僅憑海鹽晶粒的純粹鹹香、研磨黑胡椒的木質辛香，以及蒜粒粉遇熱激發出的厚實底蘊。這份扎根於高雄的質樸手作哲學，摒棄了生食對腸胃的生澀負擔，將充沛的蛋白質與纖維轉化為毫無負擔的純粹能量。</p>
     <blockquote>溫度的注入<br>是料理對身體最深情的寬容<br>讓土地的甘味有了安放的歸宿</blockquote>
+    <h2>溫沙拉情境</h2>
+    <p>單點沙拉、或搭配貝果與飲品的套餐選擇：</p>
+    <div class="photo-grid">
+      <img src="assets/img/salad-bowl.webp" alt="歪嘴雞烘焙 肉肉溫沙拉單品" width="640" height="480" loading="lazy" decoding="async">
+      <img src="assets/img/salad-set-veggie.webp" alt="歪嘴雞烘焙 季節溫沙拉套餐佐貝果" width="640" height="480" loading="lazy" decoding="async">
+      <img src="assets/img/salad-set-chicken.webp" alt="歪嘴雞烘焙 肉肉溫沙拉套餐佐貝果" width="640" height="480" loading="lazy" decoding="async">
+      <img src="assets/img/salad-set-full.webp" alt="歪嘴雞烘焙 貝果溫沙拉套餐佐飲品情境照" width="640" height="480" loading="lazy" decoding="async">
+      <img src="assets/img/salad-drink.webp" alt="歪嘴雞烘焙 溫沙拉佐飲品情境照" width="640" height="480" loading="lazy" decoding="async">
+    </div>
     <h2>品項與定價</h2>
     <p>溫沙拉現有兩款可選，也能加購溫熱薯泥蛋沙拉更加飽足：</p>
     <ul class="menu-list">
