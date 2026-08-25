@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pwa-cache-v58';
+const CACHE_NAME = 'pwa-cache-v59';
 const urlsToCache = ['/', '/index.html', '/about.html', '/faq.html', '/cake.html', '/bagel.html', '/salad.html', '/manifest.json'];
 
 // 若途中被導向過（例如 /about.html 被 Cloudflare 301 導向 /about），
