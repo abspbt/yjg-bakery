@@ -231,6 +231,25 @@
   .menu-list .menu-name{color:var(--ink-soft);}
   .menu-list .menu-price{color:#f4e3c1;white-space:nowrap;margin-left:auto;}
   .menu-list + p{margin-top:1.4em;}
+  /* 口味情境相片牆：縮圖排成 3 欄、統一 4:3 比例（跟 .story-photo 一致）
+     避免版面跳動，圖片一律 lazy load，只有捲到這段才會下載，
+     不逐一對應每種口味，避免顧客誤以為只有拍到的口味才有 */
+  .photo-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    margin-top:1em;
+  }
+  .photo-grid img{
+    width:100%;
+    height:auto;
+    aspect-ratio:4/3;
+    border-radius:10px;
+    border:1px solid var(--glass-border);
+    object-fit:cover;
+    display:block;
+  }
+  .photo-grid + p{margin-top:1.4em;}
   /* 商品規格區塊：與周圍散文分開排版，避免克數/顆數在窄螢幕上被硬斷行 */
   .story .spec-block{margin-top:1.5em;}
   .story .spec-block + p{margin-top:1.5em;}
@@ -387,6 +406,20 @@
     <div class="spec-block">
       <p class="spec-title">「小巧適口款」（65g／顆，一袋 8 顆裝）</p>
       <p class="spec-desc">輕盈俐落，為日常片刻帶來合宜的能量。</p>
+    </div>
+    <h2>手作口味情境</h2>
+    <p>先睹為快，看看夾餡貝果出爐後的模樣：</p>
+    <div class="photo-grid">
+      <img src="assets/img/bagel-fill-1.webp" alt="歪嘴雞烘焙 奶霜夾餡貝果特寫" width="640" height="480" loading="lazy" decoding="async">
+      <img src="assets/img/bagel-fill-2.webp" alt="歪嘴雞烘焙 奶油乳酪夾餡貝果特寫" width="640" height="480" loading="lazy" decoding="async">
+      <img src="assets/img/bagel-fill-3.webp" alt="歪嘴雞烘焙 蛋沙拉夾餡貝果特寫" width="640" height="480" loading="lazy" decoding="async">
+      <img src="assets/img/bagel-fill-4.webp" alt="歪嘴雞烘焙 核桃乳酪夾餡貝果特寫" width="640" height="480" loading="lazy" decoding="async">
+      <img src="assets/img/bagel-fill-5.webp" alt="歪嘴雞烘焙 起司絲夾餡貝果特寫" width="640" height="480" loading="lazy" decoding="async">
+      <img src="assets/img/bagel-fill-6.webp" alt="歪嘴雞烘焙 鳳梨果醬夾餡貝果特寫" width="640" height="480" loading="lazy" decoding="async">
+      <img src="assets/img/bagel-fill-7.webp" alt="歪嘴雞烘焙 肉鬆夾餡貝果特寫" width="640" height="480" loading="lazy" decoding="async">
+      <img src="assets/img/bagel-fill-8.webp" alt="歪嘴雞烘焙 蔓越莓夾餡貝果特寫" width="640" height="480" loading="lazy" decoding="async">
+      <img src="assets/img/bagel-cafe.webp" alt="歪嘴雞烘焙 手作貝果佐黑咖啡情境照" width="640" height="480" loading="lazy" decoding="async">
+      <img src="assets/img/bagel-drink.webp" alt="歪嘴雞烘焙 手作貝果佐飲品情境照" width="640" height="480" loading="lazy" decoding="async">
     </div>
     <h2>冷凍貝果口味與定價</h2>
     <p>目前共有「無餡系列」與「有餡系列」兩大類、二十種口味，售價如下：</p>
