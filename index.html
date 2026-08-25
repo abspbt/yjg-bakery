@@ -86,6 +86,17 @@
     overflow-x:hidden;
   }
 
+  /* 桌面寬螢幕限制版面最大寬度，避免底圖被 cover 裁切放大成誇張的
+     全螢幕特寫；超出寬度的兩側露出品牌底色，視覺尺寸不隨螢幕變寬，
+     跟其他子頁「內容寬度固定、不隨螢幕拉寬」的觀感一致 */
+  .frame{
+    position:relative;
+    max-width:480px;
+    margin:0 auto;
+    min-height:100dvh;
+    overflow:hidden;
+  }
+
   .hero{
     position:relative;
     min-height:100dvh;
@@ -101,7 +112,7 @@
      innerHeight 會回報縮放後的視覺高度，導致底圖被算小而露出底色）。 */
   .hero-bg,
   .hero-scrim{
-    position:fixed;
+    position:absolute;
     top:0;left:0;right:0;
     height:100vh;
     height:100lvh;
@@ -171,7 +182,7 @@
   }
 
   .side-nav{
-    position:fixed;
+    position:absolute;
     top:50%;
     right:26px;
     z-index:10;
@@ -244,30 +255,32 @@
 </head>
 <body>
 
-<div class="hero">
-  <div class="hero-bg" aria-hidden="true"></div>
-  <div class="hero-scrim" aria-hidden="true"></div>
-  <header>
-    <span class="brand">歪嘴雞烘焙</span>
-  </header>
+<div class="frame">
+  <div class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <header>
+      <span class="brand">歪嘴雞烘焙</span>
+    </header>
 
-  <div class="hero-copy">
-    <p class="eyebrow">高雄手作貝果・客製化蛋糕・溫沙拉</p>
-    <h1 class="title"><img src="assets/img/brand-title.webp" width="1221" height="280" alt="歪嘴雞烘焙"></h1>
-    <p class="desc">以溫度與時間慢慢等待</br>
-                    每一份貝果、蛋糕與溫沙拉，都是手作的心意。</p>
+    <div class="hero-copy">
+      <p class="eyebrow">高雄手作貝果・客製化蛋糕・溫沙拉</p>
+      <h1 class="title"><img src="assets/img/brand-title.webp" width="1221" height="280" alt="歪嘴雞烘焙"></h1>
+      <p class="desc">以溫度與時間慢慢等待</br>
+                      每一份貝果、蛋糕與溫沙拉，都是手作的心意。</p>
+    </div>
+
   </div>
 
+  <nav class="side-nav">
+    <a href="index.html" class="navtab active" aria-current="page"><span class="idx">01</span><span>首頁</span></a>
+    <a href="about.html" class="navtab"><span class="idx">02</span><span>關於</span></a>
+    <a href="bagel.html" class="navtab"><span class="idx">03</span><span>貝果</span></a>
+    <a href="cake.html" class="navtab"><span class="idx">04</span><span>蛋糕</span></a>
+    <a href="salad.html" class="navtab"><span class="idx">05</span><span>溫沙拉</span></a>
+    <a href="faq.html" class="navtab"><span class="idx">06</span><span>Q&amp;A</span></a>
+  </nav>
 </div>
-
-<nav class="side-nav">
-  <a href="index.html" class="navtab active" aria-current="page"><span class="idx">01</span><span>首頁</span></a>
-  <a href="about.html" class="navtab"><span class="idx">02</span><span>關於</span></a>
-  <a href="bagel.html" class="navtab"><span class="idx">03</span><span>貝果</span></a>
-  <a href="cake.html" class="navtab"><span class="idx">04</span><span>蛋糕</span></a>
-  <a href="salad.html" class="navtab"><span class="idx">05</span><span>溫沙拉</span></a>
-  <a href="faq.html" class="navtab"><span class="idx">06</span><span>Q&amp;A</span></a>
-</nav>
 
 <script>
   // iOS Safari 若無 touch 監聽會延遲甚至跳過 :active，導致點擊回饋變慢
