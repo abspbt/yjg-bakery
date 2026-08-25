@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://yjg-bakery.com/</loc>
     <lastmod>2026-08-22</lastmod>
@@ -14,9 +15,49 @@
   </url>
   <url>
     <loc>https://yjg-bakery.com/bagel.html</loc>
-    <lastmod>2026-08-22</lastmod>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://yjg-bakery.com/assets/img/bagle.webp</image:loc>
+      <image:caption>高雄貝果 職人手工烘焙貝果特寫</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yjg-bakery.com/assets/img/bagel-fill-1.webp</image:loc>
+      <image:caption>歪嘴雞烘焙 奶霜夾餡貝果特寫</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yjg-bakery.com/assets/img/bagel-fill-2.webp</image:loc>
+      <image:caption>歪嘴雞烘焙 奶油乳酪夾餡貝果特寫</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yjg-bakery.com/assets/img/bagel-fill-3.webp</image:loc>
+      <image:caption>歪嘴雞烘焙 蛋沙拉夾餡貝果特寫</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yjg-bakery.com/assets/img/bagel-fill-4.webp</image:loc>
+      <image:caption>歪嘴雞烘焙 核桃乳酪夾餡貝果特寫</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yjg-bakery.com/assets/img/bagel-fill-5.webp</image:loc>
+      <image:caption>歪嘴雞烘焙 起司絲夾餡貝果特寫</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yjg-bakery.com/assets/img/bagel-fill-6.webp</image:loc>
+      <image:caption>歪嘴雞烘焙 鳳梨果醬夾餡貝果特寫</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yjg-bakery.com/assets/img/bagel-fill-7.webp</image:loc>
+      <image:caption>歪嘴雞烘焙 肉鬆夾餡貝果特寫</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yjg-bakery.com/assets/img/bagel-fill-8.webp</image:loc>
+      <image:caption>歪嘴雞烘焙 蔓越莓夾餡貝果特寫</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yjg-bakery.com/assets/img/bagel-cafe.webp</image:loc>
+      <image:caption>歪嘴雞烘焙 手作貝果佐黑咖啡情境照</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://yjg-bakery.com/cake.html</loc>
@@ -26,9 +67,29 @@
   </url>
   <url>
     <loc>https://yjg-bakery.com/salad.html</loc>
-    <lastmod>2026-08-22</lastmod>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://yjg-bakery.com/assets/img/warmsalad.webp</image:loc>
+      <image:caption>高雄手作溫沙拉 田園時蔬溫沙拉</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yjg-bakery.com/assets/img/salad-bowl.webp</image:loc>
+      <image:caption>歪嘴雞烘焙 肉肉溫沙拉單品</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yjg-bakery.com/assets/img/salad-set-veggie.webp</image:loc>
+      <image:caption>歪嘴雞烘焙 季節溫沙拉套餐佐貝果</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yjg-bakery.com/assets/img/salad-set-chicken.webp</image:loc>
+      <image:caption>歪嘴雞烘焙 肉肉溫沙拉套餐佐貝果</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yjg-bakery.com/assets/img/salad-set-full.webp</image:loc>
+      <image:caption>歪嘴雞烘焙 貝果溫沙拉套餐佐飲品情境照</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://yjg-bakery.com/faq.html</loc>

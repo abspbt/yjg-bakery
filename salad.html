@@ -38,7 +38,13 @@
   "@type": "Bakery",
   "name": "歪嘴雞烘焙",
   "url": "https://yjg-bakery.com/salad.html",
-  "image": "https://yjg-bakery.com/assets/img/warmsalad.webp",
+  "image": [
+    "https://yjg-bakery.com/assets/img/warmsalad.webp",
+    "https://yjg-bakery.com/assets/img/salad-bowl.webp",
+    "https://yjg-bakery.com/assets/img/salad-set-veggie.webp",
+    "https://yjg-bakery.com/assets/img/salad-set-chicken.webp",
+    "https://yjg-bakery.com/assets/img/salad-set-full.webp"
+  ],
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "自立街85號",
@@ -242,11 +248,12 @@
   .menu-list .menu-name{color:var(--ink-soft);}
   .menu-list .menu-price{color:#f4e3c1;white-space:nowrap;}
   .menu-list + p{margin-top:1.4em;}
-  /* 情境相片牆：縮圖排成 3 欄、統一 4:3 比例（跟 .story-photo 一致）
-     避免版面跳動，圖片一律 lazy load，只有捲到這段才會下載 */
+  /* 情境相片牆：縮圖排成 2 欄（4 張照片剛好 2x2）、統一 4:3 比例
+     （跟 .story-photo 一致）避免版面跳動，圖片一律 lazy load，
+     只有捲到這段才會下載 */
   .photo-grid{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(2,1fr);
     gap:8px;
     margin-top:1em;
   }
@@ -404,7 +411,6 @@
       <img src="assets/img/salad-set-veggie.webp" alt="歪嘴雞烘焙 季節溫沙拉套餐佐貝果" width="640" height="480" loading="lazy" decoding="async">
       <img src="assets/img/salad-set-chicken.webp" alt="歪嘴雞烘焙 肉肉溫沙拉套餐佐貝果" width="640" height="480" loading="lazy" decoding="async">
       <img src="assets/img/salad-set-full.webp" alt="歪嘴雞烘焙 貝果溫沙拉套餐佐飲品情境照" width="640" height="480" loading="lazy" decoding="async">
-      <img src="assets/img/salad-drink.webp" alt="歪嘴雞烘焙 溫沙拉佐飲品情境照" width="640" height="480" loading="lazy" decoding="async">
     </div>
     <h2>品項與定價</h2>
     <p>溫沙拉現有兩款可選，也能加購溫熱薯泥蛋沙拉更加飽足：</p>
