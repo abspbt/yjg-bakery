@@ -86,12 +86,12 @@
     overflow-x:hidden;
   }
 
-  /* 桌面寬螢幕限制版面最大寬度，避免底圖被 cover 裁切放大成誇張的
-     全螢幕特寫；超出寬度的兩側露出品牌底色，視覺尺寸不隨螢幕變寬，
-     跟其他子頁「內容寬度固定、不隨螢幕拉寬」的觀感一致 */
+  /* 桌面寬螢幕限制版面最大寬度為 1000px（與子頁 header/main 的寬度上限一致），
+     避免底圖被 cover 裁切放大成誇張的全螢幕特寫；超出寬度的兩側露出品牌底色。
+     只設上限、沒設下限，手機螢幕寬度本來就遠小於 1000px，畫面不受影響 */
   .frame{
     position:relative;
-    max-width:480px;
+    max-width:1000px;
     margin:0 auto;
     min-height:100dvh;
     overflow:hidden;

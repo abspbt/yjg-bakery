@@ -92,10 +92,14 @@
   }
   /* 背景沿用首頁同一張照片，上蓋一層可調霧化程度的毛玻璃，文字疊在
      霧化玻璃上；position:fixed 貼齊視窗，長文捲動時不會跟著移動 */
+  /* 桌面寬螢幕限制版面最大寬度為 1000px（與首頁 .frame 一致），避免背景/內容
+     被拉到瀏覽器全寬；只設上限，手機螢幕本來就遠小於 1000px，畫面不受影響 */
   .page-bg,
   .page-frost{
     position:fixed;
     top:0;left:0;right:0;
+    max-width:1000px;
+    margin:0 auto;
     height:100vh;
     height:100lvh;
     pointer-events:none;
@@ -119,6 +123,8 @@
     display:flex;
     align-items:center;
     justify-content:space-between;
+    max-width:1000px;
+    margin:0 auto;
     padding:calc(16px + var(--safe-t)) 20px 16px;
   }
   .brand{
@@ -130,6 +136,8 @@
   main{
     position:relative;
     z-index:2;
+    max-width:1000px;
+    margin:0 auto;
     padding:8px calc(96px + 16px) calc(28px + var(--safe-b)) 28px;
   }
   .page-head{
@@ -230,10 +238,13 @@
   }
 
   /* 側邊直排文字導覽：與首頁 index.html 共用同一套視覺 */
+  /* right 用 max()：視窗 ≤1000px 時貼齊螢幕邊緣 26px（跟以前一樣）；
+     超過 1000px 後改成貼齊置中版面（.page-bg/header/main 同寬）的右緣，
+     算式跟 1000px 版面寬度連動，兩者交界處數值連續、不會跳動 */
   .side-nav{
     position:fixed;
     top:50%;
-    right:26px;
+    right:max(26px, calc(50vw - 474px));
     z-index:10;
     display:flex;
     flex-direction:column;
