@@ -90,6 +90,13 @@
      算出來的位置跟著偏移。固定顯示捲軸讓每一頁的量測基準一致，
      換頁時側邊導覽才不會左右跳動 */
   html,body{min-height:100%;background:#2A1F20;overflow-y:scroll;}
+  /* 捲軸配色跟著品牌深咖啡底／金色重點走，避免瀏覽器預設的亮色（通常
+     是白色）軌道在暗色背景右緣顯得突兀 */
+  ::-webkit-scrollbar{width:10px;}
+  ::-webkit-scrollbar-track{background:#2A1F20;}
+  ::-webkit-scrollbar-thumb{background:rgba(244,227,193,.35);border-radius:999px;}
+  ::-webkit-scrollbar-thumb:hover{background:rgba(244,227,193,.55);}
+  html{scrollbar-color:rgba(244,227,193,.35) #2A1F20;}
   body{
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
     color:var(--ink);
