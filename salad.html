@@ -110,7 +110,12 @@
     --frost-blur:26px;
   }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-  html,body{min-height:100%;background:#2A1F20;}
+  /* 強制常駐垂直捲軸軌道（不管內容夠不夠長都保留同一份寬度）：
+     瀏覽器的 vw 單位不會扣掉捲軸寬度，但一般版面寬度（%、margin:auto）
+     會扣掉，兩者不一致時，頁面「有沒有捲軸」就會讓 .side-nav 用 vw
+     算出來的位置跟著偏移。固定顯示捲軸讓每一頁的量測基準一致，
+     換頁時側邊導覽才不會左右跳動 */
+  html,body{min-height:100%;background:#2A1F20;overflow-y:scroll;}
   body{
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
     color:var(--ink);

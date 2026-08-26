@@ -79,6 +79,9 @@
     background:#2A1F20;
     /* 關閉橡皮筋回彈，避免下拉時把底圖之外的底色扯進畫面 */
     overscroll-behavior:none;
+    /* 強制常駐垂直捲軸軌道，跟子頁一致，避免換頁時因為「這頁有沒有捲軸」
+       不同、導致可視寬度忽窄忽寬，讓左右置中的版面跟著跳動 */
+    overflow-y:scroll;
   }
   body{
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
