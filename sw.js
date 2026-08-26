@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pwa-cache-v68';
+const CACHE_NAME = 'pwa-cache-v69';
 const urlsToCache = ['/', '/index.html', '/about.html', '/faq.html', '/cake.html', '/bagel.html', '/salad.html', '/manifest.json'];
 
 // 若途中被導向過（例如 /about.html 被 Cloudflare 301 導向 /about），
@@ -42,10 +42,14 @@ self.addEventListener('activate', event => {
   self.clients.claim();
 });
 
-// 攔截網路請求：cache-first + 背景更新（stale-while-revalidate）
-// 先前為純 cache-first 且完全不回頭打網路，導致已安裝的裝置永遠停留在
-// 舊版頁面，任何後續修正都送不到使用者手上。改為有快取先秒回、同時在
-// 背景抓最新版寫回快取，下次開啟即為新版。
+// 攔截網路請求
+// 頁面導覽（HTML）用 network-first：stale-while-revalidate 對 HTML 來說，
+// 使用者這次打開永遠看到的是「上一次」快取的舊內容，新版要等下一次重新
+// 整理才生效；手機（尤其 iOS 加到主畫面後）常常是從背景喚醒而非真正重新
+// 整理，導致新內容遲遲送不到使用者手上。HTML 檔案小、網路成本低，改成
+// 優先打網路拿最新版，離線或網路失敗才退回快取。
+// 其餘靜態資源（圖片／字型／manifest 等）維持 cache-first + 背景更新，
+// 兼顧秒開與最終一致。
 self.addEventListener('fetch', event => {
   const request = event.request;
 
@@ -54,6 +58,23 @@ self.addEventListener('fetch', event => {
 
   // 尊重 no-store：完全不碰 Cache Storage
   if (request.cache === 'no-store') return;
+
+  const isNavigation = request.mode === 'navigate' ||
+    (request.method === 'GET' && request.headers.get('accept')?.includes('text/html'));
+
+  if (isNavigation) {
+    event.respondWith(
+      fetch(request).then(response => {
+        const safeResponse = stripRedirected(response);
+        if (safeResponse && safeResponse.ok) {
+          const copy = safeResponse.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+        }
+        return safeResponse;
+      }).catch(() => caches.match(request))
+    );
+    return;
+  }
 
   event.respondWith(
     caches.match(request).then(cached => {

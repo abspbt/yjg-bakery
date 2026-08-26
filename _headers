@@ -5,3 +5,11 @@
   Permissions-Policy: geolocation=(), camera=(), microphone=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; frame-src https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'
+
+# sw.js 本身若被瀏覽器／CDN 用一般快取規則存住，手機端偵測新版會被延遲
+# （規格上瀏覽器本該繞過 HTTP 快取比對位元組，但行動端瀏覽器不一定嚴格
+# 遵守），明確標記 no-cache 強制每次都重新驗證，確保改版能盡快被偵測到
+/sw.js
+  Cache-Control: no-cache
+/manifest.json
+  Cache-Control: no-cache

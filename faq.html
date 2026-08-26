@@ -728,7 +728,26 @@
   document.addEventListener('touchstart', function(){}, {passive:true});
 
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').then(reg => {
+        // 手機（尤其 iOS 加到主畫面）常從背景喚醒而非重新整理，
+        // 頁面重新可見時主動檢查一次，避免新版遲遲偵測不到
+        document.addEventListener('visibilitychange', () => {
+          if (document.visibilityState === 'visible') reg.update();
+        });
+        window.addEventListener('pageshow', e => {
+          if (e.persisted) reg.update();
+        });
+      });
+    });
+
+    // 新版 Service Worker 接管後重新整理頁面，套用最新內容
+    let swRefreshed = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (swRefreshed) return;
+      swRefreshed = true;
+      window.location.reload();
+    });
   }
 
   // 手風琴：同一時間僅展開一則，點擊已展開項目可收合
