@@ -216,6 +216,22 @@
     border-top:1px dashed var(--glass-border);
   }
   .story .store-address{font-size:13px;color:var(--ink-dim);}
+  /* 文繞圖：蛋糕實拍照浮動於文字段落旁，讓段落自然環繞圖片邊緣 */
+  .story .inline-photo{
+    display:block;
+    width:44%;
+    max-width:260px;
+    height:auto;
+    border-radius:14px;
+    box-shadow:0 14px 32px rgba(0,0,0,.35);
+  }
+  .story .inline-photo.right{float:right;margin:6px 0 18px 20px;}
+  .story .inline-photo.left{float:left;margin:6px 20px 18px 0;}
+  .story blockquote,
+  .story .store-line{clear:both;}
+  @media (max-width:420px){
+    .story .inline-photo{width:48%;}
+  }
   /* LINE 按鈕規範同 about.html：不仿製 LINE 商標圖示，僅用純文字
      連結，背景沿用官方識別色 #06C755 */
   .cake-line-btn{
@@ -338,9 +354,11 @@
   </div>
 
   <article class="story">
+    <img class="inline-photo right" src="assets/img/cake-custom-figurine.webp" alt="高雄客製化生日蛋糕 卡通公仔造型裝飾蛋糕特寫" width="640" height="640" loading="lazy">
     <p class="lead">抹刀以微幅傾角撫平冰涼的細緻絲滑抹面，奶油霜在勻稱的推抹間泛起宛如絲緞般的柔潤光澤。南台灣高雄的明朗日光靜靜穿透玻璃，烤箱深處正釋放出小麥褐變與發酵奶油交融的溫暖焦香。</p>
     <p>座落於鳳山的街巷之中，歪嘴雞烘焙屏棄了流水線的規格化甜膩，將每一只訂做蛋糕視為一場專屬的情感敘事。堅持全手作慢工調配，輕盈細密的戚風氣孔精準托住乳脂的豐潤；舌尖初觸是嚴選食材的純粹破題，中段由絲滑細緻的內餡優雅承接，尾韻則在客製香氣的交織中層層堆疊收斂，質地分明、圓融而餘韻悠長。</p>
     <blockquote>甜點從不是單純的糖分堆疊</br>而是為特定時刻量身剪裁的記憶載體</blockquote>
+    <img class="inline-photo left" src="assets/img/cake-custom-lemon-slice.webp" alt="高雄鳳山手工蛋糕 檸檬夾層蛋糕切片特寫" width="640" height="853" loading="lazy">
     <p>當刀刃劃破細緻糕體，分切的不只是綿密層次，更是一段被溫柔封存的時光，在唇齒間留下幽微而綿長的甘甜餘韻。</p>
     <p>客製化蛋糕的細項多元，包含口味、尺寸、造型與內餡等，建議直接與我們洽詢討論，將依您的需求提供客製建議與報價。</p>
     <div class="store-line">
