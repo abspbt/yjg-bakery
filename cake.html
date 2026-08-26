@@ -228,9 +228,29 @@
   .story .inline-photo.right{float:right;margin:6px 0 18px 20px;}
   .story .inline-photo.left{float:left;margin:6px 20px 18px 0;}
   .story blockquote,
-  .story .store-line{clear:both;}
+  .story .store-line,
+  .story .cake-gallery{clear:both;}
   @media (max-width:420px){
     .story .inline-photo{width:48%;}
+  }
+  /* 三張一排的作品集網格：兩排共六張，方型裁切維持整齊 */
+  .story .cake-gallery{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:10px;
+    margin:28px 0;
+  }
+  .story .cake-gallery img{
+    display:block;
+    width:100%;
+    height:100%;
+    aspect-ratio:1 / 1;
+    object-fit:cover;
+    border-radius:10px;
+    box-shadow:0 10px 24px rgba(0,0,0,.32);
+  }
+  @media (max-width:380px){
+    .story .cake-gallery{gap:7px;}
   }
   /* LINE 按鈕規範同 about.html：不仿製 LINE 商標圖示，僅用純文字
      連結，背景沿用官方識別色 #06C755 */
@@ -360,6 +380,14 @@
     <blockquote>甜點從不是單純的糖分堆疊</br>而是為特定時刻量身剪裁的記憶載體</blockquote>
     <img class="inline-photo left" src="assets/img/cake-custom-lemon-slice.webp" alt="高雄鳳山手工蛋糕 檸檬夾層蛋糕切片特寫" width="640" height="853" loading="lazy">
     <p>當刀刃劃破細緻糕體，分切的不只是綿密層次，更是一段被溫柔封存的時光，在唇齒間留下幽微而綿長的甘甜餘韻。</p>
+    <div class="cake-gallery">
+      <img src="assets/img/cake-gallery-strawberry.webp" alt="高雄客製化蛋糕 新鮮草莓生日蛋糕" width="480" height="492" loading="lazy">
+      <img src="assets/img/cake-gallery-flower-basket.webp" alt="高雄客製化蛋糕 編織花籃奶油裝飾蛋糕" width="480" height="410" loading="lazy">
+      <img src="assets/img/cake-gallery-mothers-day-flower.webp" alt="高雄客製化蛋糕 康乃馨造型母親節蛋糕" width="480" height="480" loading="lazy">
+      <img src="assets/img/cake-gallery-lotus-bear-birthday.webp" alt="高雄客製化蛋糕 熊仔造型餅乾生日蛋糕" width="480" height="522" loading="lazy">
+      <img src="assets/img/cake-gallery-chocolate-fathers-day.webp" alt="高雄客製化蛋糕 巧克力淋面父親節蛋糕" width="480" height="480" loading="lazy">
+      <img src="assets/img/cake-gallery-green-mirror-mothers-day.webp" alt="高雄客製化蛋糕 綠色鏡面母親節蛋糕" width="480" height="480" loading="lazy">
+    </div>
     <p>客製化蛋糕的細項多元，包含口味、尺寸、造型與內餡等，建議直接與我們洽詢討論，將依您的需求提供客製建議與報價。</p>
     <div class="store-line">
       <p class="store-name">歪嘴雞烘焙</p>
