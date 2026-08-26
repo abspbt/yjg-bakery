@@ -13,7 +13,7 @@
 - **傳統多頁靜態站，不是 SPA**：每頁都是完全獨立、自足的 `.html` 檔，彼此用一般 `<a href="xxx.html">` 連結跳轉，交由瀏覽器原生換頁，沒有 client-side router，沒有 `nav.js` fetch 換內容那一套
 - 每頁各自擁有完整 `<head>`（獨立 `<title>`／meta description／OG／Twitter card／JSON-LD `Bakery` schema／canonical），SEO 各頁互不共用
 - 每頁的 CSS 都寫在自己的 `<style>` 內（無外部共用 CSS 檔，也未使用 Tailwind），對應頁面若要調整樣式直接改該頁 `<style>`，不要假設有全站共用樣式表
-- 每頁結尾都有一段幾乎相同的 inline `<script>`：註冊 `touchstart` passive listener（避免 iOS Safari `:active` 延遲）＋註冊 `/sw.js`。新增頁面時比照既有頁面複製這段，不要漏掉
+- 每頁結尾都有一段幾乎相同的 inline `<script>`：註冊 `touchstart` passive listener（避免 iOS Safari `:active` 延遲）＋註冊 `/sw.js`（含 `controllerchange` 自動 reload、`visibilitychange`／`pageshow` 主動檢查更新，detail 見下方 PWA 段落）。新增頁面時比照既有頁面完整複製這段，不要漏掉
 
 ## 頁面清單
 | 檔案 | 說明 |
@@ -28,9 +28,17 @@
 側邊導覽（各頁重複出現的 `<nav class="side-nav">`）需與此清單同步；新增/刪除頁面時記得所有頁面的 nav 區塊都要一起改。
 
 ## PWA / Service Worker（`sw.js`）
-- 策略：cache-first + 背景 stale-while-revalidate（先回快取秒開，同時背景抓新版寫回快取，下次開啟即最新版）；只處理 GET，尊重 `no-store`
-- **每次網站內容有實質更新，一定要把 `sw.js` 開頭的 `CACHE_NAME`（目前 `pwa-cache-v22`）版本號往上加**，否則已安裝到主畫面的裝置會被卡在舊版本、新內容送不到使用者手上（這是先前踩過的坑，見檔案內註解）
+- 策略（2026-08-26 起，見下方「手機讀舊快取」修正後的版本）：
+  - HTML 導覽請求（`request.mode === 'navigate'` 或 `Accept: text/html`）用 **network-first**：優先打網路拿最新頁面，離線或網路失敗才退回快取。HTML 檔小、網路成本低，用 stale-while-revalidate 會讓使用者這次打開永遠看到「上一次」的舊內容，新版要等下一次重新整理才生效，手機（尤其 iOS 加到主畫面）常是背景喚醒而非真的重新整理，等於新內容送不到
+  - 其餘靜態資源（圖片／字型／`manifest.json` 等）維持 **cache-first ＋ 背景 stale-while-revalidate**（先回快取秒開，同時背景抓新版寫回快取）
+  - 只處理 GET，尊重 `no-store`
+- **每次網站內容有實質更新，一定要把 `sw.js` 開頭的 `CACHE_NAME`（目前 `pwa-cache-v69`）版本號往上加**，否則已安裝到主畫面的裝置會被卡在舊版本、新內容送不到使用者手上（這是先前踩過的坑，見檔案內註解）
 - `urlsToCache` 需列出所有頁面路徑，新增頁面時記得同步加進去
+- 各頁尾端註冊 SW 的 inline `<script>`（見下方頁尾 script 說明）必須包含：
+  - `controllerchange` 時自動 `location.reload()`，讓新版 SW 接管後立刻套用最新內容
+  - 頁面重新可見時（`visibilitychange` 變 `visible`、`pageshow` 的 `event.persisted`）主動呼叫 `registration.update()`，解決手機從背景喚醒不會觸發完整更新檢查、偵測新版延遲的問題
+  - 新增頁面時原樣複製這段，不要只複製最陽春的 `register('/sw.js')`
+- `_headers` 需將 `/sw.js`、`/manifest.json` 明確標記 `Cache-Control: no-cache`，避免行動瀏覽器對這兩個檔案套用一般快取規則、延後偵測到新版（規格上瀏覽器該繞過 HTTP 快取比對 SW 位元組，但行動端不一定嚴格遵守）
 - `manifest.json`：`name`/`short_name` 為「歪嘴雞烘焙」，`start_url: "/"`，`background_color`/`theme_color` 為 `#2A1F20`，圖示為 `assets/img/icon-192.png`／`icon-512.png`（歪嘴雞吉祥物圓形徽章圖，與 `favicon.svg` 同一構圖，維持一致，不要各自換成不同版本）
 
 ## 路徑慣例（與舊版不同，注意）
@@ -68,7 +76,7 @@
    - 每頁都要有 `Bakery` JSON-LD（不是只有首頁/關於我們），`servesCuisine`／`address` 照現有頁面複製即可
    - `og:image`／`twitter:image` 一律用**橫式（約 1.91:1）**圖片，直式人像/情境照會在 FB／LINE／Twitter 分享預覽被裁切難看；沒有現成橫式圖就參考 `assets/img/og-cover.jpg`／`about-chef-og.jpg` 的做法另外裁一張，並補上對應的 `og:image:width`／`og:image:height`／`og:image:alt`
 2. 側邊 `<nav class="side-nav">` 是否所有頁面同步更新
-3. 頁尾 inline `<script>`（touchstart + `/sw.js` 註冊）是否存在
+3. 頁尾 inline `<script>`（touchstart + `/sw.js` 完整註冊，含 controllerchange reload／visibilitychange／pageshow 更新檢查）是否存在
 4. 若改動了會被快取的既有頁面內容，`sw.js` 的 `CACHE_NAME` 版本號是否有升版
 5. 新頁面路徑是否加進 `sw.js` 的 `urlsToCache`、`sitemap.xml`
 6. 圖片是否為 WebP、`loading="lazy"`、有描述性 alt
