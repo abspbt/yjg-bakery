@@ -61,9 +61,41 @@
   </url>
   <url>
     <loc>https://yjg-bakery.com/cake.html</loc>
-    <lastmod>2026-08-22</lastmod>
+    <lastmod>2026-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://yjg-bakery.com/assets/img/cake-custom-figurine.webp</image:loc>
+      <image:caption>高雄客製化生日蛋糕 卡通公仔造型裝飾蛋糕特寫</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yjg-bakery.com/assets/img/cake-custom-lemon-slice.webp</image:loc>
+      <image:caption>高雄鳳山手工蛋糕 檸檬夾層蛋糕切片特寫</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yjg-bakery.com/assets/img/cake-gallery-strawberry.webp</image:loc>
+      <image:caption>高雄客製化蛋糕 新鮮草莓生日蛋糕</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yjg-bakery.com/assets/img/cake-gallery-flower-basket.webp</image:loc>
+      <image:caption>高雄客製化蛋糕 編織花籃奶油裝飾蛋糕</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yjg-bakery.com/assets/img/cake-gallery-mothers-day-flower.webp</image:loc>
+      <image:caption>高雄客製化蛋糕 康乃馨造型母親節蛋糕</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yjg-bakery.com/assets/img/cake-gallery-lotus-bear-birthday.webp</image:loc>
+      <image:caption>高雄客製化蛋糕 熊仔造型餅乾生日蛋糕</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yjg-bakery.com/assets/img/cake-gallery-chocolate-fathers-day.webp</image:loc>
+      <image:caption>高雄客製化蛋糕 巧克力淋面父親節蛋糕</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yjg-bakery.com/assets/img/cake-gallery-green-mirror-mothers-day.webp</image:loc>
+      <image:caption>高雄客製化蛋糕 綠色鏡面母親節蛋糕</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://yjg-bakery.com/salad.html</loc>
