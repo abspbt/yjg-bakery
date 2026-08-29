@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pwa-cache-v70';
+const CACHE_NAME = 'pwa-cache-v71';
 const urlsToCache = ['/', '/index.html', '/about.html', '/faq.html', '/cake.html', '/bagel.html', '/salad.html', '/manifest.json'];
 
 // 導覽請求等網路回應的時限——純網路優先（無逾時）在網路很慢或卡住時會讓
