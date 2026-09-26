@@ -61,7 +61,7 @@
 - 全站沒有另外的 line-icon sprite 系統（舊版 icon sprite／`mergeSprite()` 慣例已隨 SPA 架構一起淘汰）
 
 ## 圖片規範
-- 格式：WebP（`logo.webp`／`about-chef.webp`／`bagle.webp`／`warmsalad.webp`），首頁背景例外用 `home-bg.jpg` 並以 `<link rel="preload">` 預載
+- 格式：WebP（`about-chef.webp`／`bagle.webp`／`warmsalad.webp`），首頁背景例外用 `home-bg.jpg` 並以 `<link rel="preload">` 預載
 - 一律加 `loading="lazy"`（首屏關鍵圖除外）、`width`/`height` 屬性避免版面跳動
 - alt 文字需含地區＋品項關鍵字（例如「高雄手作貝果 職人手工烘焙貝果特寫」）
 
